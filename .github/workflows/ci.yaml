@@ -1,0 +1,29 @@
+name: Biome Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  biome-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up corepack
+        run: corepack enable
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Biome check
+        run: pnpm check
