@@ -16,9 +16,6 @@
 		"enabled": true
 	},
 	"files": {
-		"ignore": [
-			"coverage",
-			"dist",
-		]
+		"ignore": ["coverage", "dist"]
 	}
 }
