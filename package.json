@@ -1,0 +1,15 @@
+{
+  "name": "play-github-copilot-workspace",
+  "version": "1.0.0",
+  "engines": {
+    "node": "22.x.x",
+    "pnpm": "9.x.x"
+  },
+  "devDependencies": {
+    "biome": "^1.0.0",
+    "typescript": "^4.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
