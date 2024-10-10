@@ -1,10 +1,11 @@
 # play-github-copilot-workspace
 
-## Using Biome Formatter
+## Setting up React with Vite
 
-To use the Biome formatter, follow these steps:
+To set up React with Vite, follow these steps:
 
 1. Install the dependencies by running `pnpm install`.
-2. Format your code by running `pnpm biome format`.
+2. Start the development server by running `pnpm dev`.
+3. Build the project by running `pnpm build`.
 
-Biome will automatically format your code according to its default rules.
+You should now have a basic React application running with Vite.
