@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  biome-check:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
