@@ -1,4 +1,4 @@
-name: Biome Check
+name: CI
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  CI:
+  ci-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +27,6 @@ jobs:
 
       - name: Run Biome check
         run: pnpm check
+
+      - name: Build project
+        run: pnpm build
