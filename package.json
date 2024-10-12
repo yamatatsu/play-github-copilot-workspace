@@ -16,11 +16,13 @@
 	"dependencies": {
 		"@cloudscape-design/components": "^3.0.0",
 		"@cloudscape-design/global-styles": "^1.0.0",
+		"@tanstack/react-router": "^1.64.2",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.0.0",
+		"@tanstack/router-plugin": "^1.64.0",
 		"@types/react": "^18.0.0",
 		"@types/react-dom": "^18.0.0",
 		"@vitejs/plugin-react": "^4.0.0",
