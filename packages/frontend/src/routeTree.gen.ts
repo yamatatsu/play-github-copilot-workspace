@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as HomeImport } from './routes/home'
 import { Route as AboutImport } from './routes/about'
+import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
@@ -26,10 +27,22 @@ const AboutRoute = AboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const IndexRoute = IndexImport.update({
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -50,36 +63,41 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
 }
 
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/about' | '/home'
+  fullPaths: '/' | '/about' | '/home'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/home'
-  id: '__root__' | '/about' | '/home'
+  to: '/' | '/about' | '/home'
+  id: '__root__' | '/' | '/about' | '/home'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   HomeRoute: typeof HomeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   HomeRoute: HomeRoute,
 }
@@ -96,9 +114,13 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/about",
         "/home"
       ]
+    },
+    "/": {
+      "filePath": "index.tsx"
     },
     "/about": {
       "filePath": "about.tsx"
