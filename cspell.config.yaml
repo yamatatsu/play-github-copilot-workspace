@@ -3,6 +3,7 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - hono
   - tanstack
 ignoreWords: []
 import: []

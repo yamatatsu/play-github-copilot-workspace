@@ -1,0 +1,14 @@
+{
+	"name": "backend",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"dev": "tsx src/index.ts"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.13.2",
+		"hono": "^4.6.4",
+		"tsx": "^4.19.1"
+	}
+}

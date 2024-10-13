@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"composite": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["packages/backend"]
+}

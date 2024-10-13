@@ -15,6 +15,18 @@ importers:
         specifier: ^5.0.0
         version: 5.6.3
 
+  packages/backend:
+    dependencies:
+      '@hono/node-server':
+        specifier: ^1.13.2
+        version: 1.13.2(hono@4.6.4)
+      hono:
+        specifier: ^4.6.4
+        version: 4.6.4
+      tsx:
+        specifier: ^4.19.1
+        version: 4.19.1
+
   packages/frontend:
     dependencies:
       '@cloudscape-design/components':
@@ -553,6 +565,12 @@ packages:
   '@formatjs/intl-localematcher@0.5.4':
     resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
 
+  '@hono/node-server@1.13.2':
+    resolution: {integrity: sha512-0w8nEmAyx0Ul0CQp8BL2VtAG4YVdpzXd/mvvM+l0G5Oq22pUyHS+KeFFPSY+czLOF5NAiV3MUNPD1n14Ol5svg==}
+    engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: ^4
+
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -877,6 +895,10 @@ packages:
   has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
+
+  hono@4.6.4:
+    resolution: {integrity: sha512-T5WqBkTOcIQblqBKB5mpzaH/A+dSpvVe938xZJCHOmOuYfF7DSwE/9/10+BMvwSPq9N/f6LiQ38HxrZSQOsXKw==}
+    engines: {node: '>=16.9.0'}
 
   intl-messageformat@10.6.0:
     resolution: {integrity: sha512-AYKl/DY1nl75pJU8EK681JOVL40uQTNJe3yEMXKfydDFoz+5hNrM/PqjchueSMKGKCZKBVgeexqZwy3uC2B36Q==}
@@ -1521,6 +1543,10 @@ snapshots:
     dependencies:
       tslib: 2.7.0
 
+  '@hono/node-server@1.13.2(hono@4.6.4)':
+    dependencies:
+      hono: 4.6.4
+
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
       '@jridgewell/set-array': 1.2.1
@@ -1868,6 +1894,8 @@ snapshots:
   globals@11.12.0: {}
 
   has-flag@3.0.0: {}
+
+  hono@4.6.4: {}
 
   intl-messageformat@10.6.0:
     dependencies:
