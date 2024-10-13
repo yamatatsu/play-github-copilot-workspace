@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"scripts": {
 		"frontend:dev": "pnpm --filter frontend dev",
+		"frontend:build": "pnpm --filter frontend build",
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
 		"check": "pnpm run '/(lint|type-check)/'"
