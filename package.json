@@ -6,6 +6,7 @@
 		"dev:frontend": "pnpm --filter frontend dev",
 		"dev:backend": "pnpm --filter backend dev",
 		"build:frontend": "pnpm --filter frontend build",
+		"cdk": "pnpm --filter cdk exec cdk",
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
 		"check": "pnpm run '/(lint|type-check)/'"

@@ -1,0 +1,22 @@
+{
+	"name": "@play-github-copilot-workspace/cdk",
+	"version": "0.1.0",
+	"scripts": {
+		"test": "vitest",
+		"test:ci": "pnpm test run",
+		"type-check": "tsc --noEmit"
+	},
+	"dependencies": {
+		"aws-cdk-lib": "2.156.0",
+		"case": "^1.6.3",
+		"constructs": "10.3.0"
+	},
+	"devDependencies": {
+		"@types/node": "22.5.4",
+		"aws-cdk": "2.156.0",
+		"esbuild": "0.23.1",
+		"tsx": "^4.19.1",
+		"typescript": "5.5.4",
+		"vitest": "^2.0.5"
+	}
+}

@@ -4,6 +4,8 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - hono
+  - oidc
   - tanstack
+  - yamatatsu
 ignoreWords: []
 import: []
