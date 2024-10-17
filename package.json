@@ -8,7 +8,8 @@
 		"build:frontend": "pnpm --filter frontend build",
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
-		"check": "pnpm run '/(lint|type-check)/'"
+		"test": "pnpm -r test:ci",
+		"check": "pnpm run '/(lint|type-check|test)/'"
 	},
 	"packageManager": "pnpm@9.12.1",
 	"engines": {

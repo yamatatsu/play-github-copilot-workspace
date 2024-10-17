@@ -3,7 +3,8 @@
 		"composite": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"strict": true
 	},
 	"include": ["packages/backend"]
 }
