@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"types": ["@types/jest", "@quramy/jest-prisma-node"]
 	}
 }

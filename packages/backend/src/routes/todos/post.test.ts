@@ -1,5 +1,4 @@
 import { testClient } from "hono/testing";
-import { expect, test } from "vitest";
 import route from "./post";
 
 test("200", async () => {

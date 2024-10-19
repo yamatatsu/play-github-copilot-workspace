@@ -4,7 +4,9 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - hono
+  - mydb
   - openapi
+  - quramy
   - tanstack
   - todos
 ignoreWords: []
