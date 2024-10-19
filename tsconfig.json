@@ -2,7 +2,6 @@
 	"compilerOptions": {
 		"target": "ES2023",
 		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
 		"module": "ESNext",
 		"skipLibCheck": true,
 
@@ -19,7 +18,5 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
-	},
-	"include": ["packages/frontend"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	}
 }
