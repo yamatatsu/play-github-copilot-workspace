@@ -11,11 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TodosImport } from './routes/todos'
 import { Route as HomeImport } from './routes/home'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const TodosRoute = TodosImport.update({
+  path: '/todos',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const HomeRoute = HomeImport.update({
   path: '/home',
@@ -57,6 +63,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeImport
       parentRoute: typeof rootRoute
     }
+    '/todos': {
+      id: '/todos'
+      path: '/todos'
+      fullPath: '/todos'
+      preLoaderRoute: typeof TodosImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -66,12 +79,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
+  '/todos': typeof TodosRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
+  '/todos': typeof TodosRoute
 }
 
 export interface FileRoutesById {
@@ -79,14 +94,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/home': typeof HomeRoute
+  '/todos': typeof TodosRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/home'
+  fullPaths: '/' | '/about' | '/home' | '/todos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/home'
-  id: '__root__' | '/' | '/about' | '/home'
+  to: '/' | '/about' | '/home' | '/todos'
+  id: '__root__' | '/' | '/about' | '/home' | '/todos'
   fileRoutesById: FileRoutesById
 }
 
@@ -94,12 +110,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   HomeRoute: typeof HomeRoute
+  TodosRoute: typeof TodosRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   HomeRoute: HomeRoute,
+  TodosRoute: TodosRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,7 +134,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/home"
+        "/home",
+        "/todos"
       ]
     },
     "/": {
@@ -127,6 +146,9 @@ export const routeTree = rootRoute
     },
     "/home": {
       "filePath": "home.tsx"
+    },
+    "/todos": {
+      "filePath": "todos.tsx"
     }
   }
 }
