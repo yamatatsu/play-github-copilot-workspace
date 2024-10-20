@@ -3,14 +3,16 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
+		"dev": "vite --mode=dev",
+		"build": "vite build --mode=prd",
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@aws-amplify/ui-react": "^6.5.4",
 		"@cloudscape-design/components": "^3.0.0",
 		"@cloudscape-design/global-styles": "^1.0.0",
 		"@tanstack/react-router": "^1.64.2",
+		"aws-amplify": "^6.6.5",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
 	},
