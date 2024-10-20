@@ -1,5 +1,4 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import { decode, sign, verify } from "hono/jwt";
 
 export default new OpenAPIHono().openapi(
 	createRoute({
@@ -28,7 +27,6 @@ export default new OpenAPIHono().openapi(
 		},
 	}),
 	(c) => {
-		const { todoId } = c.req.valid("param");
 		return c.json({
 			// TODO: Implement the delete logic
 			ok: true,

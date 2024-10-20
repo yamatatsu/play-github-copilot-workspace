@@ -1,5 +1,4 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import { decode, sign, verify } from "hono/jwt";
 
 const ErrorSchema = z.object({
 	message: z.string().openapi({
