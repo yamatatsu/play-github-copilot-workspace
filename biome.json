@@ -16,6 +16,6 @@
 		"enabled": true
 	},
 	"files": {
-		"ignore": ["coverage", "dist", "routeTree.gen.ts"]
+		"ignore": ["coverage", "dist", "routeTree.gen.ts", "cdk.out"]
 	}
 }

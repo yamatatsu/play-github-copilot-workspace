@@ -4,7 +4,8 @@
 	"type": "module",
 	"scripts": {
 		"type-check": "tsc",
-		"test": "jest --watch"
+		"test": "jest --watch",
+		"test:ci": "jest"
 	},
 	"dependencies": {
 		"aws-cdk-lib": "2.161.1",

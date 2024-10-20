@@ -3,6 +3,7 @@ ignorePaths: []
 dictionaryDefinitions: []
 dictionaries: []
 words:
+  - dotenvx
   - hono
   - mydb
   - openapi
