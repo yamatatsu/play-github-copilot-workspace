@@ -8,16 +8,16 @@ export class CognitoConstruct extends Construct {
 
 		const userPool = new cognito.UserPool(this, "UserPool", {
 			accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
+			signInAliases: { email: true },
 			autoVerify: { email: true },
+			selfSignUpEnabled: false,
 			passwordPolicy: {
 				minLength: 8,
-				requireLowercase: true,
-				requireDigits: true,
-				requireSymbols: true,
-				requireUppercase: true,
+				requireLowercase: false,
+				requireDigits: false,
+				requireSymbols: false,
+				requireUppercase: false,
 			},
-			selfSignUpEnabled: false,
-			signInAliases: { email: true },
 
 			// Modify the below two lines if you deploy for production.
 			removalPolicy: cdk.RemovalPolicy.DESTROY,

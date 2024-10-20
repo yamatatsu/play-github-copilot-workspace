@@ -33,10 +33,10 @@ exports[`Snapshot test 1`] = `
         "Policies": {
           "PasswordPolicy": {
             "MinimumLength": 8,
-            "RequireLowercase": true,
-            "RequireNumbers": true,
-            "RequireSymbols": true,
-            "RequireUppercase": true,
+            "RequireLowercase": false,
+            "RequireNumbers": false,
+            "RequireSymbols": false,
+            "RequireUppercase": false,
           },
         },
         "SmsVerificationMessage": "The verification code to your new account is {####}",
