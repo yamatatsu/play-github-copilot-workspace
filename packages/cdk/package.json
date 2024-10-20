@@ -1,0 +1,22 @@
+{
+	"name": "cdk",
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"type-check": "tsc",
+		"test": "jest --watch"
+	},
+	"dependencies": {
+		"aws-cdk-lib": "2.161.1",
+		"constructs": "^10.0.0"
+	},
+	"devDependencies": {
+		"@types/jest": "^29.5.13",
+		"@types/node": "22.7.5",
+		"aws-cdk": "2.161.1",
+		"jest": "^29.7.0",
+		"ts-jest": "^29.2.5",
+		"tsx": "^4.19.1",
+		"typescript": "~5.6.2"
+	}
+}

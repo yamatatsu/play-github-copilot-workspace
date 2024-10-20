@@ -6,8 +6,10 @@ words:
   - hono
   - mydb
   - openapi
+  - PGCW
   - quramy
   - tanstack
   - todos
+  - yamatatsu
 ignoreWords: []
 import: []
