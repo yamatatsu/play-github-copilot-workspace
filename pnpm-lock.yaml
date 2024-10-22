@@ -102,7 +102,7 @@ importers:
         version: 1.0.32
       '@tanstack/react-router':
         specifier: ^1.64.2
-        version: 1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.76.1(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       aws-amplify:
         specifier: ^6.6.5
         version: 6.6.6
@@ -1576,8 +1576,8 @@ packages:
     resolution: {integrity: sha512-2CqERleeqO3hkhJmyJm37tiL3LYgeOpmo8szqdjgtnnG0z7ZpvzkZz6HkfOr9Ca/ha7mhAiouSvLYuLkM37AMg==}
     engines: {node: '>=12'}
 
-  '@tanstack/react-router@1.75.0':
-    resolution: {integrity: sha512-iELqrMjlE/Y2JeOkvTfrPPKovrvtj1M+PTESfNfNv26Ja1efotcx0hEXiClmT7KYIlVBf0TowI5GUBNWGArm6A==}
+  '@tanstack/react-router@1.76.1':
+    resolution: {integrity: sha512-d8W1Uszni3kecOSseg2CSm+8X4RuhIzoJ14YYtJ6KtjQRkM/t44GSzt8DglVldo3v3xeh4FiVRvtCQ41hZ1MZw==}
     engines: {node: '>=12'}
     peerDependencies:
       '@tanstack/router-generator': 1.74.2
@@ -5112,7 +5112,7 @@ snapshots:
 
   '@tanstack/history@1.61.1': {}
 
-  '@tanstack/react-router@1.75.0(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-router@1.76.1(@tanstack/router-generator@1.74.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/history': 1.61.1
       '@tanstack/react-store': 0.5.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
