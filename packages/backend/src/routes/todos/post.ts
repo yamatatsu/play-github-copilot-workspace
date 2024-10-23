@@ -1,5 +1,5 @@
+import { prisma } from "@/db";
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-import { prisma } from "../../db";
 import { error400Schema, todoSchema } from "../_shared";
 
 export default new OpenAPIHono().openapi(

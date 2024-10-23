@@ -1,5 +1,5 @@
+import { prisma } from "@/db";
 import { testClient } from "hono/testing";
-import { prisma } from "../../db";
 import route from "./post";
 
 const expectDate = expect.stringMatching(

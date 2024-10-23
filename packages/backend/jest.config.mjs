@@ -5,4 +5,7 @@ export default {
 		"^.+.tsx?$": ["ts-jest", {}],
 	},
 	setupFilesAfterEnv: ["<rootDir>/__test__/setup-prisma.mjs"],
+	moduleNameMapper: {
+		"^@/(.*)$": "<rootDir>/src/$1",
+	},
 };

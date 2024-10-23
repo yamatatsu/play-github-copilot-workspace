@@ -1,4 +1,4 @@
-jest.mock("../src/db", () => {
+jest.mock("@/db", () => {
 	return {
 		prisma: jestPrisma.client,
 	};

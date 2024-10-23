@@ -4,6 +4,10 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
-		"types": ["@types/jest", "@quramy/jest-prisma-node"]
+		"types": ["@types/jest", "@quramy/jest-prisma-node"],
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"]
+		}
 	}
 }
