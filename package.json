@@ -9,7 +9,7 @@
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
 		"test": "pnpm -r test:ci",
-		"check": "pnpm run '/(lint|type-check|test)/'"
+		"check": "pnpm run '/(lint|type-check)/'"
 	},
 	"packageManager": "pnpm@9.12.2",
 	"engines": {

@@ -1,10 +1,6 @@
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
-
-const ErrorSchema = z.object({
-	message: z.string().openapi({
-		example: "Bad Request",
-	}),
-});
+import { prisma } from "../../db";
+import { error400Schema, todoSchema } from "../_shared";
 
 export default new OpenAPIHono().openapi(
 	createRoute({
@@ -30,16 +26,7 @@ export default new OpenAPIHono().openapi(
 				description: "Success to create the todo",
 				content: {
 					"application/json": {
-						schema: z
-							.object({
-								id: z.string().openapi({
-									example: "123",
-								}),
-								title: z.string().openapi({
-									example: "Buy milk",
-								}),
-							})
-							.openapi("TODO"),
+						schema: todoSchema,
 					},
 				},
 			},
@@ -47,33 +34,23 @@ export default new OpenAPIHono().openapi(
 				description: "Returns an error",
 				content: {
 					"application/json": {
-						schema: ErrorSchema,
+						schema: error400Schema,
 					},
 				},
 			},
 		},
 	}),
-	(c) => {
+	async (c) => {
 		const { title } = c.req.valid("json");
-		// TODO: Implement the create logic
-		return c.json(
-			{
-				id: "123",
+
+		const todo = await prisma.todo.create({
+			data: {
 				title,
+				content: "test-content",
+				createdBy: "test-user",
 			},
-			200,
-		);
-	},
-	// validation error hook
-	(result, c) => {
-		if (!result.success) {
-			return c.json(
-				{
-					message: "Bad Request",
-					details: result.error.flatten(),
-				},
-				400,
-			);
-		}
+		});
+
+		return c.json(todo, 200);
 	},
 );
