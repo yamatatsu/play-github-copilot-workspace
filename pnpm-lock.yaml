@@ -96,7 +96,7 @@ importers:
         version: 6.5.5(@aws-amplify/core@6.4.6)(@types/react@18.3.11)(aws-amplify@6.6.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(xstate@4.38.3)
       '@cloudscape-design/components':
         specifier: ^3.0.0
-        version: 3.0.798(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.0.799(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@cloudscape-design/global-styles':
         specifier: ^1.0.0
         version: 1.0.32
@@ -610,8 +610,8 @@ packages:
   '@cloudscape-design/component-toolkit@1.0.0-beta.75':
     resolution: {integrity: sha512-W9RNu6RRzFLl7r6uAqNGw+vdWhMEAEvy+Db7SW+4OsbjZ2sp5fu9m3aFUBfi3kryju+C8F3Dxum3aDLfgI001Q==}
 
-  '@cloudscape-design/components@3.0.798':
-    resolution: {integrity: sha512-yx5PTpaYoxyBSRrWtObDfrfkNmutJI6mwvPawFnfXV13KACPJ8n31+nisVZBoFY6obVMIurG5e0hWEuXahDfgw==}
+  '@cloudscape-design/components@3.0.799':
+    resolution: {integrity: sha512-5Ca1IP4IyAwGqX4JS1oDIw7o0v2/i6aTBUbLVWAhwxWU5bzieFW/DVqJRCryab4dQ1UFnNT3q2Yvmf/czD9isA==}
     peerDependencies:
       react: ^16.8 || ^17 || ^18
       react-dom: ^16.8 || ^17 || ^18
@@ -3971,7 +3971,7 @@ snapshots:
       '@juggle/resize-observer': 3.4.0
       tslib: 2.8.0
 
-  '@cloudscape-design/components@3.0.798(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@cloudscape-design/components@3.0.799(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@cloudscape-design/collection-hooks': 1.0.55(react@18.3.1)
       '@cloudscape-design/component-toolkit': 1.0.0-beta.75
