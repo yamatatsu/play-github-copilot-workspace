@@ -3,6 +3,8 @@ import Button from "@cloudscape-design/components/button";
 import Header from "@cloudscape-design/components/header";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import Table from "@cloudscape-design/components/table";
+import Modal from "@cloudscape-design/components/modal";
+import Input from "@cloudscape-design/components/input";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
@@ -23,6 +25,8 @@ type Item = {
 function Component() {
 	const queryClient = useQueryClient();
 	const [selectedTodo, setSelectedTodo] = useState<Item | null>(null);
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const [newTodoTitle, setNewTodoTitle] = useState("");
 
 	const { data: todos, isLoading } = useQuery({
 		queryKey: ["api", "todos"],
@@ -42,7 +46,7 @@ function Component() {
 			const idToken = session.tokens?.idToken?.toString();
 
 			const res = await apiClient.todos.$post({
-				json: { title: "Test Task" },
+				json: { title: newTodoTitle },
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
@@ -55,6 +59,8 @@ function Component() {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
+			setIsModalVisible(false);
+			setNewTodoTitle("");
 		},
 	});
 
@@ -77,70 +83,103 @@ function Component() {
 	});
 
 	return (
-		<Table
-			columnDefinitions={[
-				{
-					id: "title",
-					header: "Title",
-					cell: (item) => item.title,
-				},
-				{
-					id: "description",
-					header: "Description",
-					cell: (item) => item.content,
-				},
-				{
-					id: "done",
-					header: "Done",
-					cell: (item) => (item.done ? "Yes" : "No"),
-				},
-			]}
-			items={todos || []}
-			loading={isLoading}
-			loadingText="Loading resources"
-			header={
-				<Header
-					actions={
-						<SpaceBetween direction="horizontal" size="xs">
-							<Button
-								variant="normal"
-								disabled={!selectedTodo}
-								onClick={() => {
-									if (!selectedTodo) {
-										return;
-									}
-									todoDeleteMutation.mutate(selectedTodo.id);
-								}}
-							>
-								delete
-							</Button>
-							<Button
-								variant="primary"
-								onClick={() => {
-									todoPostMutation.mutate();
-								}}
-							>
-								create
-							</Button>
+		<>
+			<Table
+				columnDefinitions={[
+					{
+						id: "title",
+						header: "Title",
+						cell: (item) => item.title,
+					},
+					{
+						id: "description",
+						header: "Description",
+						cell: (item) => item.content,
+					},
+					{
+						id: "done",
+						header: "Done",
+						cell: (item) => (item.done ? "Yes" : "No"),
+					},
+				]}
+				items={todos || []}
+				loading={isLoading}
+				loadingText="Loading resources"
+				header={
+					<Header
+						actions={
+							<SpaceBetween direction="horizontal" size="xs">
+								<Button
+									variant="normal"
+									disabled={!selectedTodo}
+									onClick={() => {
+										if (!selectedTodo) {
+											return;
+										}
+										todoDeleteMutation.mutate(selectedTodo.id);
+									}}
+								>
+									delete
+								</Button>
+								<Button
+									variant="primary"
+									onClick={() => {
+										setIsModalVisible(true);
+									}}
+								>
+									create
+								</Button>
+							</SpaceBetween>
+						}
+					>
+						TODOs
+					</Header>
+				}
+				empty={
+					<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
+						<SpaceBetween size="m">
+							<b>No resources</b>
+							<Button>Create resource</Button>
 						</SpaceBetween>
-					}
-				>
-					TODOs
-				</Header>
-			}
-			empty={
-				<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
-					<SpaceBetween size="m">
-						<b>No resources</b>
-						<Button>Create resource</Button>
+					</Box>
+				}
+				selectionType="single"
+				selectedItems={selectedTodo ? [selectedTodo] : []}
+				onSelectionChange={({ detail }) =>
+					setSelectedTodo(detail.selectedItems[0])
+				}
+			/>
+			<Modal
+				onDismiss={() => setIsModalVisible(false)}
+				visible={isModalVisible}
+				header="Create TODO"
+				footer={
+					<SpaceBetween direction="horizontal" size="xs">
+						<Button
+							variant="link"
+							onClick={() => setIsModalVisible(false)}
+						>
+							Cancel
+						</Button>
+						<Button
+							variant="primary"
+							onClick={() => {
+								todoPostMutation.mutate();
+							}}
+						>
+							Submit
+						</Button>
 					</SpaceBetween>
-				</Box>
-			}
-			selectionType="single"
-			selectedItems={selectedTodo ? [selectedTodo] : []}
-			onSelectionChange={({ detail }) =>
-				setSelectedTodo(detail.selectedItems[0])
-			}
-		/>
+				}
+			>
+				<SpaceBetween size="m">
+					<Input
+						value={newTodoTitle}
+						onChange={(event) => setNewTodoTitle(event.detail.value)}
+						placeholder="Enter TODO title"
+					/>
+				</SpaceBetween>
+			</Modal>
+		</>
 	);
 }
