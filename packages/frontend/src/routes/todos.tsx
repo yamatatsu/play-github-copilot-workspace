@@ -47,7 +47,7 @@ function Component() {
 			return res.json();
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries(["api", "todos"]);
+			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
 		},
 	});
 
