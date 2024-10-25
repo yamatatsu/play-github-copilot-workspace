@@ -3,7 +3,7 @@ import Button from "@cloudscape-design/components/button";
 import Cards from "@cloudscape-design/components/cards";
 import Header from "@cloudscape-design/components/header";
 import SpaceBetween from "@cloudscape-design/components/space-between";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { apiClient } from "../api/apiClient";
@@ -13,6 +13,8 @@ export const Route = createFileRoute("/todos")({
 });
 
 function Component() {
+	const queryClient = useQueryClient();
+
 	const { data: todos, isLoading } = useQuery({
 		queryKey: ["api", "todos"],
 		queryFn: async () => {
@@ -43,6 +45,9 @@ function Component() {
 			}
 
 			return res.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
 		},
 	});
 

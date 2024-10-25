@@ -10,7 +10,7 @@
 		"type-check": "tsc --noEmit",
 		"dev": "dotenvx run -- tsx watch src/index.ts",
 		"start": "dotenvx run -- tsx src/index.ts",
-		"build": "rm -rf dist && tsc --project ./tsconfig.hc.json"
+		"build": "rm -rf dist && prisma generate && tsc --project ./tsconfig.hc.json"
 	},
 	"dependencies": {
 		"@hono/node-server": "^1.13.2",
