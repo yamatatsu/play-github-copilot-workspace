@@ -29,6 +29,9 @@ importers:
       '@prisma/client':
         specifier: 5.21.1
         version: 5.21.1(prisma@5.21.1)
+      '@types/node':
+        specifier: 22.7.9
+        version: 22.7.9
       hono:
         specifier: ^4.6.5
         version: 4.6.6
