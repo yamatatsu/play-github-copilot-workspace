@@ -52,51 +52,51 @@ function Component() {
 	});
 
 	return (
-			<Table
-				columnDefinitions={[
-					{
-						id: "title",
-						header: "Title",
-						cell: (item) => item.title,
-					},
-					{
-						id: "description",
-						header: "Description",
-						cell: (item) => item.content,
-					},
-					{
-						id: "done",
-						header: "Done",
-						cell: (item) => (item.done ? "Yes" : "No"),
-					},
-				]}
-				items={todos || []}
-				loading={isLoading}
-				loadingText="Loading resources"
-				header={
-					<Header
-						actions={
-							<Button
-								variant="primary"
-								onClick={() => {
-									todoPostMutation.mutate();
-								}}
-							>
-								Create New TODO
-							</Button>
-						}
-					>
-						TODOs
-					</Header>
-				}
-				empty={
-					<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
-						<SpaceBetween size="m">
-							<b>No resources</b>
-							<Button>Create resource</Button>
-						</SpaceBetween>
-					</Box>
-				}
-			/>
+		<Table
+			columnDefinitions={[
+				{
+					id: "title",
+					header: "Title",
+					cell: (item) => item.title,
+				},
+				{
+					id: "description",
+					header: "Description",
+					cell: (item) => item.content,
+				},
+				{
+					id: "done",
+					header: "Done",
+					cell: (item) => (item.done ? "Yes" : "No"),
+				},
+			]}
+			items={todos || []}
+			loading={isLoading}
+			loadingText="Loading resources"
+			header={
+				<Header
+					actions={
+						<Button
+							variant="primary"
+							onClick={() => {
+								todoPostMutation.mutate();
+							}}
+						>
+							Create New TODO
+						</Button>
+					}
+				>
+					TODOs
+				</Header>
+			}
+			empty={
+				<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
+					<SpaceBetween size="m">
+						<b>No resources</b>
+						<Button>Create resource</Button>
+					</SpaceBetween>
+				</Box>
+			}
+		/>
 	);
 }
