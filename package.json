@@ -6,6 +6,7 @@
 		"dev:frontend": "pnpm --filter frontend dev",
 		"dev:backend": "pnpm --filter backend dev",
 		"build:frontend": "pnpm --filter frontend build",
+		"prisma": "pnpm --filter backend exec prisma",
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
 		"test": "pnpm -r test:ci",

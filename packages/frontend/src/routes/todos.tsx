@@ -2,7 +2,6 @@ import Box from "@cloudscape-design/components/box";
 import Button from "@cloudscape-design/components/button";
 import Cards from "@cloudscape-design/components/cards";
 import Header from "@cloudscape-design/components/header";
-import Link from "@cloudscape-design/components/link";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
@@ -19,10 +18,10 @@ function Component() {
 		queryFn: async () => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
-
-			return apiClient.todos.$get({
+			const res = await apiClient.todos.$get({
 				header: { authorization: `Bearer ${idToken}` },
 			});
+			return res.json();
 		},
 	});
 
@@ -32,11 +31,18 @@ function Component() {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
-			return apiClient.todos.$post({
+			const res = await apiClient.todos.$post({
 				// TODO: set title from input
-				json: { title: "" },
+				json: { title: "Test Task" },
 				header: { authorization: `Bearer ${idToken}` },
 			});
+
+			if (res.status === 400) {
+				const { message } = await res.json();
+				throw new Error(message);
+			}
+
+			return res.json();
 		},
 	});
 
@@ -59,11 +65,7 @@ function Component() {
 				</Header>
 			}
 			cardDefinition={{
-				header: (item) => (
-					<Link href="#" fontSize="heading-m">
-						{item.title}
-					</Link>
-				),
+				header: (item) => item.title,
 				sections: [
 					{
 						id: "description",
@@ -77,19 +79,18 @@ function Component() {
 					},
 				],
 			}}
-			visibleSections={["description", "done"]}
-			cardsPerRow={[{ cards: 1 }, { minWidth: 500, cards: 2 }]}
-			loadingText="Loading resources"
+			cardsPerRow={[{ cards: 1 }]}
 			empty={
-					<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
-						<SpaceBetween size="m">
-							<b>No resources</b>
-							<Button>Create resource</Button>
-						</SpaceBetween>
-					</Box>
-				}
+				<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
+					<SpaceBetween size="m">
+						<b>No resources</b>
+						<Button>Create resource</Button>
+					</SpaceBetween>
+				</Box>
+			}
 			items={todos || []}
 			loading={isLoading}
+			loadingText="Loading resources"
 		/>
 	);
 }
