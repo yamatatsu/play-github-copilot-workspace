@@ -5,6 +5,7 @@ import { OpenAPIHono } from "@hono/zod-openapi";
 import root from "./routes/root";
 import todosDelete from "./routes/todos/delete";
 import todosPost from "./routes/todos/post";
+import todosList from "./routes/todos/list";
 
 const _app = new OpenAPIHono({
 	defaultHook: (result, c) => {
@@ -21,6 +22,7 @@ export const app = _app
 	.route("/", root)
 	.route("/", todosDelete)
 	.route("/", todosPost)
+	.route("/", todosList)
 	.doc("/doc", {
 		openapi: "3.0.0",
 		info: { version: "1.0.0", title: "My API" },
