@@ -1,10 +1,10 @@
 import Box from "@cloudscape-design/components/box";
 import Button from "@cloudscape-design/components/button";
 import Header from "@cloudscape-design/components/header";
+import Input from "@cloudscape-design/components/input";
+import Modal from "@cloudscape-design/components/modal";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import Table from "@cloudscape-design/components/table";
-import Modal from "@cloudscape-design/components/modal";
-import Input from "@cloudscape-design/components/input";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
@@ -155,10 +155,7 @@ function Component() {
 				header="Create TODO"
 				footer={
 					<SpaceBetween direction="horizontal" size="xs">
-						<Button
-							variant="link"
-							onClick={() => setIsModalVisible(false)}
-						>
+						<Button variant="link" onClick={() => setIsModalVisible(false)}>
 							Cancel
 						</Button>
 						<Button
