@@ -9,9 +9,10 @@ export default new OpenAPIHono().openapi(
 		tags: ["todos"],
 		request: {
 			params: z.object({
-				todoId: z.string().min(3).openapi({
-					example: "1212121",
-				}),
+				todoId: z.string().regex(/^\d+$/).transform(Number),
+			}),
+			headers: z.object({
+				authorization: z.string(),
 			}),
 		},
 		responses: {
@@ -28,10 +29,12 @@ export default new OpenAPIHono().openapi(
 		},
 	}),
 	async (c) => {
-		const { todoId } = c.req.valid("params");
+		const { todoId } = c.req.valid("param");
 
 		await prisma.todo.delete({
-			where: { id: parseInt(todoId) },
+			where: {
+				id: todoId,
+			},
 		});
 
 		return c.json({

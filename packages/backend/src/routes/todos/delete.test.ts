@@ -7,7 +7,7 @@ const app = new OpenAPIHono().route("/", route);
 const client = testClient(app);
 
 test("delete TODO", async () => {
-	// Create a TODO to delete
+	// GIVEN
 	const todo = await prisma.todo.create({
 		data: {
 			title: "Test TODO",
@@ -16,15 +16,16 @@ test("delete TODO", async () => {
 		},
 	});
 
-	// Delete the TODO
+	// WHEN
 	const res = await client.todos[":todoId"].$delete({
 		param: { todoId: todo.id.toString() },
+		header: { authorization: "" },
 	});
 
+	// THEN
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual({ ok: true });
 
-	// Verify the TODO is deleted
 	const deletedTodo = await prisma.todo.findUnique({
 		where: { id: todo.id },
 	});

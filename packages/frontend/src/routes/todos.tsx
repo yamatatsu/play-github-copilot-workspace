@@ -6,16 +6,23 @@ import Table from "@cloudscape-design/components/table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
-import { apiClient } from "../api/apiClient";
 import { useState } from "react";
+import { apiClient } from "../api/apiClient";
 
 export const Route = createFileRoute("/todos")({
 	component: Component,
 });
 
+type Item = {
+	id: number;
+	title: string;
+	content: string;
+	done: boolean;
+};
+
 function Component() {
 	const queryClient = useQueryClient();
-	const [selectedTodo, setSelectedTodo] = useState(null);
+	const [selectedTodo, setSelectedTodo] = useState<Item | null>(null);
 
 	const { data: todos, isLoading } = useQuery({
 		queryKey: ["api", "todos"],
@@ -52,7 +59,7 @@ function Component() {
 	});
 
 	const todoDeleteMutation = useMutation({
-		mutationFn: async (todoId) => {
+		mutationFn: async (todoId: number) => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
@@ -61,15 +68,11 @@ function Component() {
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
-			if (res.status === 400) {
-				const { message } = await res.json();
-				throw new Error(message);
-			}
-
 			return res.json();
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
+			setSelectedTodo(null);
 		},
 	});
 
@@ -81,7 +84,7 @@ function Component() {
 					header: "Title",
 					cell: (item) => item.title,
 				},
-					{
+				{
 					id: "description",
 					header: "Description",
 					cell: (item) => item.content,
@@ -91,20 +94,6 @@ function Component() {
 					header: "Done",
 					cell: (item) => (item.done ? "Yes" : "No"),
 				},
-				{
-					id: "actions",
-					header: "Actions",
-					cell: (item) => (
-						<Button
-							variant="link"
-							onClick={() => {
-								todoDeleteMutation.mutate(item.id);
-							}}
-						>
-							Delete
-						</Button>
-					),
-				},
 			]}
 			items={todos || []}
 			loading={isLoading}
@@ -112,14 +101,28 @@ function Component() {
 			header={
 				<Header
 					actions={
-						<Button
-							variant="primary"
-							onClick={() => {
-								todoPostMutation.mutate();
-							}}
-						>
-							Create New TODO
-						</Button>
+						<SpaceBetween direction="horizontal" size="xs">
+							<Button
+								variant="normal"
+								disabled={!selectedTodo}
+								onClick={() => {
+									if (!selectedTodo) {
+										return;
+									}
+									todoDeleteMutation.mutate(selectedTodo.id);
+								}}
+							>
+								delete
+							</Button>
+							<Button
+								variant="primary"
+								onClick={() => {
+									todoPostMutation.mutate();
+								}}
+							>
+								create
+							</Button>
+						</SpaceBetween>
 					}
 				>
 					TODOs
@@ -135,7 +138,9 @@ function Component() {
 			}
 			selectionType="single"
 			selectedItems={selectedTodo ? [selectedTodo] : []}
-			onSelectionChange={({ detail }) => setSelectedTodo(detail.selectedItems[0])}
+			onSelectionChange={({ detail }) =>
+				setSelectedTodo(detail.selectedItems[0])
+			}
 		/>
 	);
 }
