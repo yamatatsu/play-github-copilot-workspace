@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"]
+		},
+		"strict": true,
+		"skipLibCheck": true
+	},
+	"include": ["src/app.ts"]
+}

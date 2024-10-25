@@ -12,5 +12,11 @@ export const todoSchema = z
 		title: z.string().openapi({
 			example: "Buy milk",
 		}),
+		content: z.string().openapi({
+			example: "Buy milk",
+		}),
+		done: z.boolean().openapi({
+			example: false,
+		}),
 	})
 	.openapi("TODO");

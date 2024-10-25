@@ -3,17 +3,21 @@
 	"type": "module",
 	"version": "1.0.0",
 	"description": "",
-	"types": "src/app.ts",
+	"types": "dist/app.d.ts",
 	"scripts": {
 		"test": "dotenvx run -- jest --watch",
-		"dev": "tsx watch src/index.ts",
-		"start": "tsx src/index.ts"
+		"test:ci": "dotenvx run -- jest",
+		"type-check": "tsc --noEmit",
+		"dev": "dotenvx run -- tsx watch src/index.ts",
+		"start": "dotenvx run -- tsx src/index.ts",
+		"build": "rm -rf dist && tsc --project ./tsconfig.hc.json"
 	},
 	"dependencies": {
 		"@hono/node-server": "^1.13.2",
 		"@hono/swagger-ui": "^0.4.1",
 		"@hono/zod-openapi": "^0.16.4",
 		"@prisma/client": "5.21.1",
+		"@types/node": "22.7.9",
 		"hono": "^4.6.5",
 		"jose": "^5.9.6",
 		"tsx": "^4.19.1",

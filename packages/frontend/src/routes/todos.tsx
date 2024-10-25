@@ -2,9 +2,8 @@ import Box from "@cloudscape-design/components/box";
 import Button from "@cloudscape-design/components/button";
 import Cards from "@cloudscape-design/components/cards";
 import Header from "@cloudscape-design/components/header";
-import Link from "@cloudscape-design/components/link";
 import SpaceBetween from "@cloudscape-design/components/space-between";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { apiClient } from "../api/apiClient";
@@ -13,63 +12,37 @@ export const Route = createFileRoute("/todos")({
 	component: Component,
 });
 
-const items = [
-	{
-		name: "Item 1",
-		alt: "First",
-		description: "This is the first item",
-		type: "1A",
-		size: "Small",
-	},
-	{
-		name: "Item 2",
-		alt: "Second",
-		description: "This is the second item",
-		type: "1B",
-		size: "Large",
-	},
-	{
-		name: "Item 3",
-		alt: "Third",
-		description: "This is the third item",
-		type: "1A",
-		size: "Large",
-	},
-	{
-		name: "Item 4",
-		alt: "Fourth",
-		description: "This is the fourth item",
-		type: "2A",
-		size: "Small",
-	},
-	{
-		name: "Item 5",
-		alt: "Fifth",
-		description: "This is the fifth item",
-		type: "2A",
-		size: "Large",
-	},
-	{
-		name: "Item 6",
-		alt: "Sixth",
-		description: "This is the sixth item",
-		type: "1A",
-		size: "Small",
-	},
-];
-
 function Component() {
+	const { data: todos, isLoading } = useQuery({
+		queryKey: ["api", "todos"],
+		queryFn: async () => {
+			const session = await fetchAuthSession();
+			const idToken = session.tokens?.idToken?.toString();
+			const res = await apiClient.todos.$get({
+				header: { authorization: `Bearer ${idToken}` },
+			});
+			return res.json();
+		},
+	});
+
 	// TODO: refactor as moving to a shared file
 	const todoPostMutation = useMutation({
 		mutationFn: async () => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
-			return apiClient.todos.$post({
+			const res = await apiClient.todos.$post({
 				// TODO: set title from input
-				json: { title: "" },
+				json: { title: "Test Task" },
 				header: { authorization: `Bearer ${idToken}` },
 			});
+
+			if (res.status === 400) {
+				const { message } = await res.json();
+				throw new Error(message);
+			}
+
+			return res.json();
 		},
 	});
 
@@ -92,32 +65,21 @@ function Component() {
 				</Header>
 			}
 			cardDefinition={{
-				header: (item) => (
-					<Link href="#" fontSize="heading-m">
-						{item.name}
-					</Link>
-				),
+				header: (item) => item.title,
 				sections: [
 					{
 						id: "description",
 						header: "Description",
-						content: (item) => item.description,
+						content: (item) => item.content,
 					},
 					{
-						id: "type",
-						header: "Type",
-						content: (item) => item.type,
-					},
-					{
-						id: "size",
-						header: "Size",
-						content: (item) => item.size,
+						id: "done",
+						header: "Done",
+						content: (item) => (item.done ? "Yes" : "No"),
 					},
 				],
 			}}
-			visibleSections={["description", "type", "size"]}
-			cardsPerRow={[{ cards: 1 }, { minWidth: 500, cards: 2 }]}
-			loadingText="Loading resources"
+			cardsPerRow={[{ cards: 1 }]}
 			empty={
 				<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
 					<SpaceBetween size="m">
@@ -126,7 +88,9 @@ function Component() {
 					</SpaceBetween>
 				</Box>
 			}
-			items={items}
+			items={todos || []}
+			loading={isLoading}
+			loadingText="Loading resources"
 		/>
 	);
 }
