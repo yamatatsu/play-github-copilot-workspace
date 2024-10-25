@@ -6,6 +6,7 @@
 	"types": "dist/app.d.ts",
 	"scripts": {
 		"test": "dotenvx run -- jest --watch",
+		"test:ci": "dotenvx run -- jest",
 		"type-check": "tsc --noEmit",
 		"dev": "dotenvx run -- tsx watch src/index.ts",
 		"start": "dotenvx run -- tsx src/index.ts",
