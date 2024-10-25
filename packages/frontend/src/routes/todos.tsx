@@ -1,8 +1,8 @@
 import Box from "@cloudscape-design/components/box";
 import Button from "@cloudscape-design/components/button";
-import Cards from "@cloudscape-design/components/cards";
 import Header from "@cloudscape-design/components/header";
 import SpaceBetween from "@cloudscape-design/components/space-between";
+import Table from "@cloudscape-design/components/table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
@@ -52,7 +52,27 @@ function Component() {
 	});
 
 	return (
-		<Cards
+		<Table
+			columnDefinitions={[
+				{
+					id: "title",
+					header: "Title",
+					cell: (item) => item.title,
+				},
+				{
+					id: "description",
+					header: "Description",
+					cell: (item) => item.content,
+				},
+				{
+					id: "done",
+					header: "Done",
+					cell: (item) => (item.done ? "Yes" : "No"),
+				},
+			]}
+			items={todos || []}
+			loading={isLoading}
+			loadingText="Loading resources"
 			header={
 				<Header
 					actions={
@@ -69,22 +89,6 @@ function Component() {
 					TODOs
 				</Header>
 			}
-			cardDefinition={{
-				header: (item) => item.title,
-				sections: [
-					{
-						id: "description",
-						header: "Description",
-						content: (item) => item.content,
-					},
-					{
-						id: "done",
-						header: "Done",
-						content: (item) => (item.done ? "Yes" : "No"),
-					},
-				],
-			}}
-			cardsPerRow={[{ cards: 1 }]}
 			empty={
 				<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
 					<SpaceBetween size="m">
@@ -93,9 +97,6 @@ function Component() {
 					</SpaceBetween>
 				</Box>
 			}
-			items={todos || []}
-			loading={isLoading}
-			loadingText="Loading resources"
 		/>
 	);
 }
