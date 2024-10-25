@@ -2,10 +2,11 @@ import bearerAuth from "@/middleware/bearerAuth";
 import cors from "@/middleware/cors";
 import { swaggerUI } from "@hono/swagger-ui";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { logger } from "hono/logger";
 import root from "./routes/root";
 import todosDelete from "./routes/todos/delete";
-import todosPost from "./routes/todos/post";
 import todosList from "./routes/todos/list";
+import todosPost from "./routes/todos/post";
 
 const _app = new OpenAPIHono({
 	defaultHook: (result, c) => {
@@ -15,6 +16,7 @@ const _app = new OpenAPIHono({
 	},
 });
 
+_app.use("/*", logger());
 _app.use("/*", cors);
 _app.use("/*", bearerAuth);
 
