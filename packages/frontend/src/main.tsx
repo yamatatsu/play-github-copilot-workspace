@@ -1,5 +1,6 @@
 import "@aws-amplify/ui-react/styles.css";
 import "@cloudscape-design/global-styles/index.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { Amplify } from "aws-amplify";
 import React from "react";
@@ -14,6 +15,8 @@ Amplify.configure({
 		},
 	},
 });
+
+const queryClient = new QueryClient();
 
 const router = createRouter({ routeTree });
 
@@ -30,6 +33,8 @@ if (!container) {
 const root = createRoot(container);
 root.render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={router} />
+		</QueryClientProvider>
 	</React.StrictMode>,
 );

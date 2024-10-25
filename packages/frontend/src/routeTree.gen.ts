@@ -18,16 +18,19 @@ import { Route as IndexImport } from './routes/index'
 // Create/Update Routes
 
 const TodosRoute = TodosImport.update({
+  id: '/todos',
   path: '/todos',
   getParentRoute: () => rootRoute,
 } as any)
 
 const HomeRoute = HomeImport.update({
+  id: '/home',
   path: '/home',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
