@@ -1,3 +1,4 @@
+import { prisma } from "@/db";
 import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
 
 export default new OpenAPIHono().openapi(
@@ -26,9 +27,14 @@ export default new OpenAPIHono().openapi(
 			},
 		},
 	}),
-	(c) => {
+	async (c) => {
+		const { todoId } = c.req.valid("params");
+
+		await prisma.todo.delete({
+			where: { id: parseInt(todoId) },
+		});
+
 		return c.json({
-			// TODO: Implement the delete logic
 			ok: true,
 		});
 	},

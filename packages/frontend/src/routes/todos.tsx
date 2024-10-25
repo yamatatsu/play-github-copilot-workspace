@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchAuthSession } from "aws-amplify/auth";
 import { apiClient } from "../api/apiClient";
+import { useState } from "react";
 
 export const Route = createFileRoute("/todos")({
 	component: Component,
@@ -14,6 +15,7 @@ export const Route = createFileRoute("/todos")({
 
 function Component() {
 	const queryClient = useQueryClient();
+	const [selectedTodo, setSelectedTodo] = useState(null);
 
 	const { data: todos, isLoading } = useQuery({
 		queryKey: ["api", "todos"],
@@ -27,15 +29,35 @@ function Component() {
 		},
 	});
 
-	// TODO: refactor as moving to a shared file
 	const todoPostMutation = useMutation({
 		mutationFn: async () => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
 			const res = await apiClient.todos.$post({
-				// TODO: set title from input
 				json: { title: "Test Task" },
+				header: { authorization: `Bearer ${idToken}` },
+			});
+
+			if (res.status === 400) {
+				const { message } = await res.json();
+				throw new Error(message);
+			}
+
+			return res.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
+		},
+	});
+
+	const todoDeleteMutation = useMutation({
+		mutationFn: async (todoId) => {
+			const session = await fetchAuthSession();
+			const idToken = session.tokens?.idToken?.toString();
+
+			const res = await apiClient.todos[":todoId"].$delete({
+				param: { todoId: todoId.toString() },
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
@@ -59,7 +81,7 @@ function Component() {
 					header: "Title",
 					cell: (item) => item.title,
 				},
-				{
+					{
 					id: "description",
 					header: "Description",
 					cell: (item) => item.content,
@@ -68,6 +90,20 @@ function Component() {
 					id: "done",
 					header: "Done",
 					cell: (item) => (item.done ? "Yes" : "No"),
+				},
+				{
+					id: "actions",
+					header: "Actions",
+					cell: (item) => (
+						<Button
+							variant="link"
+							onClick={() => {
+								todoDeleteMutation.mutate(item.id);
+							}}
+						>
+							Delete
+						</Button>
+					),
 				},
 			]}
 			items={todos || []}
@@ -97,6 +133,9 @@ function Component() {
 					</SpaceBetween>
 				</Box>
 			}
+			selectionType="single"
+			selectedItems={selectedTodo ? [selectedTodo] : []}
+			onSelectionChange={({ detail }) => setSelectedTodo(detail.selectedItems[0])}
 		/>
 	);
 }
