@@ -1,10 +1,10 @@
-const { JWT_ISSUER, JWT_AUDIENCE } = process.env;
+const { USER_POOL_ID, USER_POOL_CLIENT_ID } = process.env;
 
-if (!JWT_ISSUER) {
-	throw new Error("JWT_ISSUER is required");
+if (!USER_POOL_ID) {
+	throw new Error("USER_POOL_ID is required");
 }
-if (!JWT_AUDIENCE) {
-	throw new Error("JWT_AUDIENCE is required");
+if (!USER_POOL_CLIENT_ID) {
+	throw new Error("USER_POOL_CLIENT_ID is required");
 }
 
-export default { JWT_ISSUER, JWT_AUDIENCE };
+export default { USER_POOL_ID, USER_POOL_CLIENT_ID };

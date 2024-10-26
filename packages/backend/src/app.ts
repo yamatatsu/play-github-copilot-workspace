@@ -16,12 +16,14 @@ const _app = new OpenAPIHono({
 	},
 });
 
+// The health check endpoint doesn't need authentication and any other middleware.
+_app.route("/", root);
+
 _app.use("/*", logger());
 _app.use("/*", cors);
 _app.use("/*", bearerAuth);
 
 export const app = _app
-	.route("/", root)
 	.route("/", todosDelete)
 	.route("/", todosPost)
 	.route("/", todosList)

@@ -32,12 +32,12 @@ importers:
       '@types/node':
         specifier: 22.8.1
         version: 22.8.1
+      aws-jwt-verify:
+        specifier: ^4.0.1
+        version: 4.0.1
       hono:
         specifier: ^4.6.5
         version: 4.6.7
-      jose:
-        specifier: ^5.9.6
-        version: 5.9.6
       tsx:
         specifier: ^4.19.1
         version: 4.19.1
@@ -1802,6 +1802,10 @@ packages:
     engines: {node: '>= 14.15.0'}
     hasBin: true
 
+  aws-jwt-verify@4.0.1:
+    resolution: {integrity: sha512-kzvi71eD3w/mCpYRUY7cz6DX4bfYihGdI2yV3FYQ2JuZZenqAqDPz0gWj0ew6vlAtdEVBNb7p+Dm2TAIxpVYMA==}
+    engines: {node: '>=14.0.0'}
+
   babel-dead-code-elimination@1.0.6:
     resolution: {integrity: sha512-JxFi9qyRJpN0LjEbbjbN8g0ux71Qppn9R8Qe3k6QzHg2CaKsbUQtbn307LQGiDLGjV6JCtEFqfxzVig9MyDCHQ==}
 
@@ -2450,9 +2454,6 @@ packages:
     peerDependenciesMeta:
       node-notifier:
         optional: true
-
-  jose@5.9.6:
-    resolution: {integrity: sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==}
 
   js-cookie@3.0.5:
     resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
@@ -5377,6 +5378,8 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.2
 
+  aws-jwt-verify@4.0.1: {}
+
   babel-dead-code-elimination@1.0.6:
     dependencies:
       '@babel/core': 7.25.8
@@ -6241,8 +6244,6 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
-
-  jose@5.9.6: {}
 
   js-cookie@3.0.5: {}
 
