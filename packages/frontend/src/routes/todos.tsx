@@ -141,7 +141,13 @@ function Component() {
 					<Box margin={{ vertical: "xs" }} textAlign="center" color="inherit">
 						<SpaceBetween size="m">
 							<b>No resources</b>
-							<Button>Create resource</Button>
+							<Button
+								onClick={() => {
+									setIsModalVisible(true);
+								}}
+							>
+								create
+							</Button>
 						</SpaceBetween>
 					</Box>
 				}
