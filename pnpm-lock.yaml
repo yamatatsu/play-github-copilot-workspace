@@ -47,7 +47,7 @@ importers:
     devDependencies:
       '@dotenvx/dotenvx':
         specifier: ^1.20.0
-        version: 1.20.1
+        version: 1.21.0
       '@quramy/jest-prisma-node':
         specifier: ^1.8.1
         version: 1.8.1(jest-environment-node@29.7.0)(jest@29.7.0(@types/node@22.7.9))
@@ -674,8 +674,8 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
 
-  '@dotenvx/dotenvx@1.20.1':
-    resolution: {integrity: sha512-BkUNp2YdlH0XuzsceTtobFZBkOvxdCUxgv8kDGUEBoU9sfeYmzpDuzTm8QAgsDiusyy9ET1zaEK1s7ojXTnz5w==}
+  '@dotenvx/dotenvx@1.21.0':
+    resolution: {integrity: sha512-tbVWzE20ENwex7VOqTX2PiDP68v4SurAOsFHXMiNNCXYzpOXEje/M8lmMr+a8xKCfkhAmO1L+XhsPL7FDyfx4w==}
     hasBin: true
 
   '@ecies/ciphers@0.2.0':
@@ -4089,7 +4089,7 @@ snapshots:
       react: 18.3.1
       tslib: 2.8.0
 
-  '@dotenvx/dotenvx@1.20.1':
+  '@dotenvx/dotenvx@1.21.0':
     dependencies:
       commander: 11.1.0
       dotenv: 16.4.5
