@@ -27,6 +27,7 @@ function Component() {
 	const [selectedTodo, setSelectedTodo] = useState<Item | null>(null);
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const [newTodoTitle, setNewTodoTitle] = useState("");
+	const [newTodoContent, setNewTodoContent] = useState(""); // P62f4
 
 	const { data: todos, isLoading } = useQuery({
 		queryKey: ["api", "todos"],
@@ -46,7 +47,7 @@ function Component() {
 			const idToken = session.tokens?.idToken?.toString();
 
 			const res = await apiClient.todos.$post({
-				json: { title: newTodoTitle },
+				json: { title: newTodoTitle, content: newTodoContent }, // Pc374
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
@@ -61,6 +62,7 @@ function Component() {
 			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
 			setIsModalVisible(false);
 			setNewTodoTitle("");
+			setNewTodoContent(""); // P4be3
 		},
 	});
 
@@ -174,6 +176,11 @@ function Component() {
 						value={newTodoTitle}
 						onChange={(event) => setNewTodoTitle(event.detail.value)}
 						placeholder="Enter TODO title"
+					/>
+					<Input
+						value={newTodoContent} // Pee25
+						onChange={(event) => setNewTodoContent(event.detail.value)} // Pee25
+						placeholder="Enter TODO content" // Pee25
 					/>
 				</SpaceBetween>
 			</Modal>

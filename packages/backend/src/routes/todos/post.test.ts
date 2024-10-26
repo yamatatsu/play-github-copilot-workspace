@@ -18,14 +18,14 @@ const client = testClient(app);
 
 test("response when 200", async () => {
 	const res = await client.todos.$post({
-		json: { title: "Buy milk" },
+		json: { title: "Buy milk", content: "Buy milk" },
 		header: { authorization: "" },
 	});
 
 	expect(await res.json()).toEqual({
 		id: expect.any(Number),
 		title: "Buy milk",
-		content: "test-content",
+		content: "Buy milk",
 		done: false,
 		createdBy: "test-user-sub",
 		createdAt: expectDate,
@@ -35,7 +35,7 @@ test("response when 200", async () => {
 
 test("new record when 200", async () => {
 	const res = await client.todos.$post({
-		json: { title: "Buy milk" },
+		json: { title: "Buy milk", content: "Buy milk" },
 		header: { authorization: "" },
 	});
 
@@ -50,7 +50,7 @@ test("new record when 200", async () => {
 	expect(todo).toEqual({
 		id: expect.any(Number),
 		title: "Buy milk",
-		content: "test-content",
+		content: "Buy milk",
 		done: false,
 		createdBy: "test-user-sub",
 		createdAt: expect.anything(),
@@ -75,6 +75,13 @@ test("400", async () => {
 					expected: "string",
 					message: "Required",
 					path: ["title"],
+					received: "undefined",
+				},
+				{
+					code: "invalid_type",
+					expected: "string",
+					message: "Required",
+					path: ["content"],
 					received: "undefined",
 				},
 			],

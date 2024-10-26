@@ -19,6 +19,9 @@ export default new OpenAPIHono().openapi(
 							title: z.string().openapi({
 								example: "Buy milk",
 							}),
+							content: z.string().openapi({
+								example: "Buy milk",
+							}),
 						}),
 					},
 				},
@@ -47,15 +50,14 @@ export default new OpenAPIHono().openapi(
 		},
 	}),
 	async (c) => {
-		const { title } = c.req.valid("json");
+		const { title, content } = c.req.valid("json");
 
 		const { sub } = jwtPayloadSchema.parse(c.get("jwtPayload"));
 
 		const todo = await prisma.todo.create({
 			data: {
 				title,
-				// TODO: get content from request
-				content: "test-content",
+				content,
 				createdBy: sub,
 			},
 		});
