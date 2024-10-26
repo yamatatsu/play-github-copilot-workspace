@@ -5,8 +5,9 @@
 	"description": "",
 	"types": "dist/app.d.ts",
 	"scripts": {
-		"test": "dotenvx run -- jest --watch",
-		"test:ci": "dotenvx run -- jest",
+		"test": "dotenvx run -f .env.test -- jest --watch",
+		"test:ci": "dotenvx run -f .env.test -- jest",
+		"migrate:deploy:test": "dotenvx run -f .env.test -- prisma migrate deploy",
 		"type-check": "tsc --noEmit",
 		"dev": "dotenvx run -- tsx watch src/index.ts",
 		"start": "dotenvx run -- tsx src/index.ts",

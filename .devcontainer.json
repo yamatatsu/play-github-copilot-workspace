@@ -2,6 +2,6 @@
 	"tasks": {
 		"test": "pnpm check",
 		"launch": "pnpm dev:frontend",
-		"build": "pnpm i"
+		"build": "pnpm i && pnpm build"
 	}
 }
