@@ -9,6 +9,7 @@ words:
   - mydb
   - openapi
   - PGCW
+  - pino
   - quramy
   - tanstack
   - todos

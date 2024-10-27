@@ -1,8 +1,8 @@
 import bearerAuth from "@/middleware/bearerAuth";
 import cors from "@/middleware/cors";
+import logger from "@/middleware/logger";
 import { swaggerUI } from "@hono/swagger-ui";
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { logger } from "hono/logger";
 import root from "./routes/root";
 import todosDelete from "./routes/todos/delete";
 import todosList from "./routes/todos/list";
@@ -19,7 +19,7 @@ const _app = new OpenAPIHono({
 // The health check endpoint doesn't need authentication and any other middleware.
 _app.route("/", root);
 
-_app.use("/*", logger());
+_app.use("/*", logger);
 _app.use("/*", cors);
 _app.use("/*", bearerAuth);
 
