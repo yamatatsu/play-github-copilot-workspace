@@ -26,6 +26,9 @@ importers:
       '@hono/zod-openapi':
         specifier: ^0.16.4
         version: 0.16.4(hono@4.6.7)(zod@3.23.8)
+      '@hono/zod-validator':
+        specifier: ^0.4.1
+        version: 0.4.1(hono@4.6.7)(zod@3.23.8)
       '@prisma/client':
         specifier: 5.21.1
         version: 5.21.1(prisma@5.21.1)
@@ -1016,6 +1019,12 @@ packages:
 
   '@hono/zod-validator@0.3.0':
     resolution: {integrity: sha512-7XcTk3yYyk6ldrO/VuqsroE7stvDZxHJQcpATRAyha8rUxJNBPV3+6waDrARfgEqxOVlzIadm3/6sE/dPseXgQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
+
+  '@hono/zod-validator@0.4.1':
+    resolution: {integrity: sha512-I8LyfeJfvVmC5hPjZ2Iij7RjexlgSBT7QJudZ4JvNPLxn0JQ3sqclz2zydlwISAnw21D2n4LQ0nfZdoiv9fQQA==}
     peerDependencies:
       hono: '>=3.9.0'
       zod: ^3.19.1
@@ -4352,6 +4361,11 @@ snapshots:
       zod: 3.23.8
 
   '@hono/zod-validator@0.3.0(hono@4.6.7)(zod@3.23.8)':
+    dependencies:
+      hono: 4.6.7
+      zod: 3.23.8
+
+  '@hono/zod-validator@0.4.1(hono@4.6.7)(zod@3.23.8)':
     dependencies:
       hono: 4.6.7
       zod: 3.23.8
