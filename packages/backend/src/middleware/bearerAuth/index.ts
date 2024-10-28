@@ -1,11 +1,10 @@
 import { logger } from "@/utils/logger";
-import type { CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
 import { bearerAuth } from "hono/bearer-auth";
-import { verifyJwt } from "./jwtVerifier";
+import { type Payload, verifyJwt } from "./jwtVerifier";
 
 declare module "hono" {
 	interface ContextVariableMap {
-		jwtPayload: CognitoJwtPayload;
+		jwtPayload: Payload;
 	}
 }
 
@@ -30,16 +29,16 @@ export default bearerAuth({
 	noAuthenticationHeaderMessage: () => {
 		logger.info("No authentication header");
 
-		return { message: "Unauthorized" };
+		return { code: "authorization_failed", message: "Unauthorized" };
 	},
 	invalidAuthenticationHeaderMessage: () => {
 		logger.info("Invalid authentication header");
 
-		return { message: "Unauthorized" };
+		return { code: "authorization_failed", message: "Unauthorized" };
 	},
 	invalidTokenMessage: () => {
 		logger.info("Invalid token");
 
-		return { message: "Unauthorized" };
+		return { code: "authorization_failed", message: "Unauthorized" };
 	},
 });

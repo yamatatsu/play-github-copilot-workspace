@@ -1,11 +1,12 @@
 import { prisma } from "@/db";
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, z } from "@hono/zod-openapi";
+import { openapiRoute } from "../_shared/openapiRoute";
 import { error400Schema, todoSchema } from "../_shared/schema";
 
 // TODO: refactor - Should jwtPayloadSchema be defined here?
 const jwtPayloadSchema = z.object({ sub: z.string() });
 
-export default new OpenAPIHono().openapi(
+export default openapiRoute().openapi(
 	createRoute({
 		method: "post",
 		path: "/todos",

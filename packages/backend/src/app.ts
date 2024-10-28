@@ -8,13 +8,7 @@ import todosDelete from "./routes/todos/delete";
 import todosList from "./routes/todos/list";
 import todosPost from "./routes/todos/post";
 
-const _app = new OpenAPIHono({
-	defaultHook: (result, c) => {
-		if (!result.success) {
-			return c.json({ errors: result.error.flatten() }, 400);
-		}
-	},
-});
+const _app = new OpenAPIHono();
 
 // The health check endpoint doesn't need authentication and any other middleware.
 _app.route("/", root);

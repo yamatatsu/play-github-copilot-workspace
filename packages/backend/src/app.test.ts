@@ -1,7 +1,14 @@
 import { testClient } from "hono/testing";
 import { app } from "./app";
+import * as JwtVerifier from "./middleware/bearerAuth/jwtVerifier";
+
+const verifyJwtSpy = jest.spyOn(JwtVerifier, "verifyJwt");
 
 const client = testClient(app);
+
+beforeEach(() => {
+	jest.resetAllMocks();
+});
 
 test("health check", async () => {
 	// @ts-expect-error
@@ -17,7 +24,38 @@ test("400 caused by invalid authentication header", async () => {
 	});
 
 	expect(res.status).toBe(400);
-	expect(await res.json()).toEqual({ message: "Unauthorized" });
+	expect(await res.json()).toEqual({
+		code: "authorization_failed",
+		message: "Unauthorized",
+	});
+});
+
+test("400 caused by invalid authentication header", async () => {
+	// GIVEN
+	verifyJwtSpy.mockReturnValue(
+		Promise.resolve({ ok: true, payload: { sub: "test-sub" } }),
+	);
+
+	// WHEN
+	const res = await client.todos.$post({
+		// @ts-expect-error
+		json: { title: 1 }, // empty body
+		header: { authorization: "Bearer xxx" },
+	});
+
+	// THEN
+	expect(res.status).toBe(400);
+	expect(await res.json()).toEqual({
+		code: "schema_validation_failed",
+		message: "Bad Request",
+		errors: {
+			fieldErrors: {
+				title: ["Expected string, received number"],
+				content: ["Required"],
+			},
+			formErrors: [],
+		},
+	});
 });
 
 test("401 caused by no authentication header", async () => {
@@ -27,14 +65,25 @@ test("401 caused by no authentication header", async () => {
 	});
 
 	expect(res.status).toBe(401);
-	expect(await res.json()).toEqual({ message: "Unauthorized" });
+	expect(await res.json()).toEqual({
+		code: "authorization_failed",
+		message: "Unauthorized",
+	});
 });
 
 test("401 caused by invalid token", async () => {
+	// GIVEN
+	verifyJwtSpy.mockReturnValue(Promise.resolve({ ok: false }));
+
+	// WHEN
 	const res = await client.todos.$get({
 		header: { authorization: "Bearer xxx" },
 	});
 
+	// THEN
 	expect(res.status).toBe(401);
-	expect(await res.json()).toEqual({ message: "Unauthorized" });
+	expect(await res.json()).toEqual({
+		code: "authorization_failed",
+		message: "Unauthorized",
+	});
 });

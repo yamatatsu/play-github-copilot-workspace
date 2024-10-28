@@ -1,6 +1,7 @@
-import { OpenAPIHono, createRoute, z } from "@hono/zod-openapi";
+import { createRoute, z } from "@hono/zod-openapi";
+import { openapiRoute } from "./_shared/openapiRoute";
 
-export default new OpenAPIHono().openapi(
+export default openapiRoute().openapi(
 	createRoute({
 		method: "get",
 		path: "/",
