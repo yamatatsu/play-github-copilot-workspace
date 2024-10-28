@@ -66,25 +66,14 @@ test("400", async () => {
 	});
 
 	expect(await res.json()).toEqual({
-		success: false,
-		error: {
-			name: "ZodError",
-			issues: [
-				{
-					code: "invalid_type",
-					expected: "string",
-					message: "Required",
-					path: ["title"],
-					received: "undefined",
-				},
-				{
-					code: "invalid_type",
-					expected: "string",
-					message: "Required",
-					path: ["content"],
-					received: "undefined",
-				},
-			],
+		code: "schema_validation_failed",
+		message: "Bad Request",
+		errors: {
+			fieldErrors: {
+				title: ["Required"],
+				content: ["Required"],
+			},
+			formErrors: [],
 		},
 	});
 	expect(res.status).toEqual(400);

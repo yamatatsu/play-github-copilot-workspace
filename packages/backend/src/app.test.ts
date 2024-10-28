@@ -30,34 +30,6 @@ test("400 caused by invalid authentication header", async () => {
 	});
 });
 
-test("400 caused by invalid authentication header", async () => {
-	// GIVEN
-	verifyJwtSpy.mockReturnValue(
-		Promise.resolve({ ok: true, payload: { sub: "test-sub" } }),
-	);
-
-	// WHEN
-	const res = await client.todos.$post({
-		// @ts-expect-error
-		json: { title: 1 }, // empty body
-		header: { authorization: "Bearer xxx" },
-	});
-
-	// THEN
-	expect(res.status).toBe(400);
-	expect(await res.json()).toEqual({
-		code: "schema_validation_failed",
-		message: "Bad Request",
-		errors: {
-			fieldErrors: {
-				title: ["Expected string, received number"],
-				content: ["Required"],
-			},
-			formErrors: [],
-		},
-	});
-});
-
 test("401 caused by no authentication header", async () => {
 	const res = await client.todos.$get({
 		// @ts-expect-error
