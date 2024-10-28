@@ -13,16 +13,7 @@ const client = testClient(app);
 test("valid JWT", async () => {
 	verifyJwtSpy.mockResolvedValueOnce({
 		ok: true,
-		payload: {
-			sub: "test-sub",
-			token_use: "id",
-			iss: "",
-			exp: 0,
-			iat: 0,
-			auth_time: 0,
-			jti: "",
-			origin_jti: "",
-		},
+		payload: { sub: "test-sub" },
 	});
 
 	const res = await client.index.$get({
@@ -41,23 +32,26 @@ test("invalid JWT", async () => {
 	});
 
 	expect(res.status).toBe(401);
-	expect(await res.text()).toEqual("Unauthorized");
+	expect(await res.json()).toEqual({
+		code: "authorization_failed",
+		message: "Unauthorized",
+	});
 });
 
 // Non JWT cases
 test.each`
 	case                      | header                             | status | message
-	${"no header"}            | ${undefined}                       | ${401} | ${"Unauthorized"}
-	${"no header"}            | ${{}}                              | ${401} | ${"Unauthorized"}
-	${"null"}                 | ${{ authorization: null }}         | ${400} | ${"Bad Request"}
-	${"empty string"}         | ${{ authorization: "" }}           | ${401} | ${"Unauthorized"}
-	${"invalid string 'xxx'"} | ${{ authorization: "xxx" }}        | ${400} | ${"Bad Request"}
-	${"only 'Bearer'"}        | ${{ authorization: "Bearer" }}     | ${400} | ${"Bad Request"}
-	${"only 'Bearer '"}       | ${{ authorization: "Bearer " }}    | ${400} | ${"Bad Request"}
-	${"lowercase 'bearer '"}  | ${{ authorization: "bearer xxx" }} | ${400} | ${"Bad Request"}
+	${"no header"}            | ${undefined}                       | ${401} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"no header"}            | ${{}}                              | ${401} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"null"}                 | ${{ authorization: null }}         | ${400} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"empty string"}         | ${{ authorization: "" }}           | ${401} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"invalid string 'xxx'"} | ${{ authorization: "xxx" }}        | ${400} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"only 'Bearer'"}        | ${{ authorization: "Bearer" }}     | ${400} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"only 'Bearer '"}       | ${{ authorization: "Bearer " }}    | ${400} | ${{ code: "authorization_failed", message: "Unauthorized" }}
+	${"lowercase 'bearer '"}  | ${{ authorization: "bearer xxx" }} | ${400} | ${{ code: "authorization_failed", message: "Unauthorized" }}
 `("$case", async ({ header, status, message }) => {
 	const res = await client.index.$get({ header });
 
 	expect(res.status).toBe(status);
-	expect(await res.text()).toEqual(message);
+	expect(await res.json()).toEqual(message);
 });

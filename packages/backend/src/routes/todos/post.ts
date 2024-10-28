@@ -3,9 +3,6 @@ import { createRoute, z } from "@hono/zod-openapi";
 import { openapiRoute } from "../_shared/openapiRoute";
 import { error400Schema, todoSchema } from "../_shared/schema";
 
-// TODO: refactor - Should jwtPayloadSchema be defined here?
-const jwtPayloadSchema = z.object({ sub: z.string() });
-
 export default openapiRoute().openapi(
 	createRoute({
 		method: "post",
@@ -53,7 +50,7 @@ export default openapiRoute().openapi(
 	async (c) => {
 		const { title, content } = c.req.valid("json");
 
-		const { sub } = jwtPayloadSchema.parse(c.get("jwtPayload"));
+		const { sub } = c.get("jwtPayload");
 
 		const todo = await prisma.todo.create({
 			data: {
