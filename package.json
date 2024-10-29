@@ -14,7 +14,7 @@
 		"check": "pnpm run '/(lint|type-check)/'",
 		"prepare": "husky"
 	},
-	"packageManager": "pnpm@9.12.2",
+	"packageManager": "pnpm@9.12.3",
 	"engines": {
 		"node": "^22.x.x",
 		"pnpm": "^9.x.x"
