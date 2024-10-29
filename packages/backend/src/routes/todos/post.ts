@@ -52,7 +52,7 @@ export default openapiRoute().openapi(
 
 		const { sub } = c.get("jwtPayload");
 
-		const todo = await prisma.todo.create({
+		const task = await prisma.task.create({
 			data: {
 				title,
 				content,
@@ -60,6 +60,6 @@ export default openapiRoute().openapi(
 			},
 		});
 
-		return c.json(todo, 200);
+		return c.json(task, 200);
 	},
 );

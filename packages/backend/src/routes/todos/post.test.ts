@@ -43,7 +43,7 @@ test("new record when 200", async () => {
 
 	const { id } = await res.json();
 
-	const todo = await prisma.todo.findUniqueOrThrow({
+	const todo = await prisma.task.findUniqueOrThrow({
 		where: { id },
 	});
 

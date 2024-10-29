@@ -16,7 +16,7 @@ export default new Hono().delete(
 	async (c) => {
 		const { todoId } = c.req.valid("param");
 
-		await prisma.todo.delete({
+		await prisma.task.delete({
 			where: {
 				id: todoId,
 			},

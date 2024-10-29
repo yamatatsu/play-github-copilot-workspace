@@ -25,7 +25,7 @@ export default openapiRoute().openapi(
 		},
 	}),
 	async (c) => {
-		const todos = await prisma.todo.findMany();
-		return c.json(todos, 200);
+		const tasks = await prisma.task.findMany();
+		return c.json(tasks, 200);
 	},
 );

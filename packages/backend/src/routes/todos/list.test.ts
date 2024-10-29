@@ -28,7 +28,7 @@ test("response when 200", async () => {
 		},
 	];
 
-	await prisma.todo.createMany({
+	await prisma.task.createMany({
 		data: todos,
 	});
 

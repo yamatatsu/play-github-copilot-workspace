@@ -23,7 +23,7 @@ export default new Hono().post(
 
 		const { sub } = c.get("jwtPayload");
 
-		const todo = await prisma.todo.create({
+		const todo = await prisma.task.create({
 			data: {
 				title,
 				content,

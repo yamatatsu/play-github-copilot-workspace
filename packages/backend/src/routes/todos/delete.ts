@@ -32,7 +32,7 @@ export default openapiRoute().openapi(
 	async (c) => {
 		const { todoId } = c.req.valid("param");
 
-		await prisma.todo.delete({
+		await prisma.task.delete({
 			where: {
 				id: todoId,
 			},
