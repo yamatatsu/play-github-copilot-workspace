@@ -8,19 +8,19 @@
 		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@play-github-copilot-workspace/backend": "workspace:*",
 		"@aws-amplify/ui-react": "^6.5.4",
-		"@cloudscape-design/components": "^3.0.0",
+		"@cloudscape-design/components": "^3.0.807",
 		"@cloudscape-design/global-styles": "^1.0.0",
+		"@play-github-copilot-workspace/backend": "workspace:*",
 		"@tanstack/react-query": "^5.59.16",
-		"@tanstack/react-router": "^1.64.2",
+		"@tanstack/react-router": "^1.77.6",
 		"aws-amplify": "^6.6.5",
-		"hono": "^4.6.5",
+		"hono": "^4.6.8",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
 	},
 	"devDependencies": {
-		"@tanstack/router-plugin": "^1.64.0",
+		"@tanstack/router-plugin": "^1.76.4",
 		"@types/react": "^18.0.0",
 		"@types/react-dom": "^18.0.0",
 		"@vitejs/plugin-react": "^4.0.0",
