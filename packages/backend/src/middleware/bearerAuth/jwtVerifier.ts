@@ -22,7 +22,7 @@ export async function verifyJwt(token: string): Promise<Response> {
 		if (err instanceof JwtBaseError) {
 			logger.info({
 				msg: "Failed to verify JWT",
-				error: { message: err.message, cause: err.cause },
+				error: { message: err.message },
 			});
 			return { ok: false };
 		}
