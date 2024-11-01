@@ -8,13 +8,13 @@
 		"test:ci": "jest"
 	},
 	"dependencies": {
-		"aws-cdk-lib": "2.164.1",
+		"aws-cdk-lib": "2.165.0",
 		"constructs": "^10.0.0"
 	},
 	"devDependencies": {
 		"@types/jest": "^29.5.13",
 		"@types/node": "22.8.5",
-		"aws-cdk": "2.164.1",
+		"aws-cdk": "2.165.0",
 		"jest": "^29.7.0",
 		"ts-jest": "^29.2.5",
 		"tsx": "^4.19.2",
