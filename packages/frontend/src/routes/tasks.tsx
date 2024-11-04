@@ -51,11 +51,6 @@ function Component() {
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
-			if (res.status === 400) {
-				const { message } = await res.json();
-				throw new Error(message);
-			}
-
 			return res.json();
 		},
 		onSuccess: () => {

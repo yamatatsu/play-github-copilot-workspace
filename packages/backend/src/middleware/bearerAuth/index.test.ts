@@ -1,11 +1,11 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { Hono } from "hono";
 import { testClient } from "hono/testing";
 import bearerAuth from "./";
 import * as JwtVerifier from "./jwtVerifier";
 
 const verifyJwtSpy = jest.spyOn(JwtVerifier, "verifyJwt");
 
-const app = new OpenAPIHono().use("/", bearerAuth).get("/", (c) => {
+const app = new Hono().use("/", bearerAuth).get("/", (c) => {
 	return c.text("ok");
 });
 const client = testClient(app);

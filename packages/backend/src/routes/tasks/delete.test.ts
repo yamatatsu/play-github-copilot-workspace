@@ -1,9 +1,9 @@
 import { prisma } from "@/db";
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { Hono } from "hono";
 import { testClient } from "hono/testing";
 import route from "./delete";
 
-const app = new OpenAPIHono().route("/", route);
+const app = new Hono().route("/", route);
 const client = testClient(app);
 
 test("delete TASK", async () => {
@@ -18,8 +18,8 @@ test("delete TASK", async () => {
 
 	// WHEN
 	const res = await client.tasks[":taskId"].$delete({
+		header: { authorization: "Bearer xxx" },
 		param: { taskId: task.id.toString() },
-		header: { authorization: "" },
 	});
 
 	// THEN

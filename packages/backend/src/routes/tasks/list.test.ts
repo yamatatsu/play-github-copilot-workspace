@@ -1,9 +1,9 @@
 import { prisma } from "@/db";
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { Hono } from "hono";
 import { testClient } from "hono/testing";
 import route from "./list";
 
-const app = new OpenAPIHono().route("/", route);
+const app = new Hono().route("/", route);
 const client = testClient(app);
 
 test("response when 200", async () => {
@@ -32,7 +32,9 @@ test("response when 200", async () => {
 		data: tasks,
 	});
 
-	const res = await client.tasks.$get({ header: { authorization: "" } });
+	const res = await client.tasks.$get({
+		header: { authorization: "Bearer xxx" },
+	});
 
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual([

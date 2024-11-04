@@ -1,34 +1,19 @@
 import { prisma } from "@/db";
-import { createRoute, z } from "@hono/zod-openapi";
-import { openapiRoute } from "../_shared/openapiRoute";
+import { Hono } from "hono";
+import { z } from "zod";
+import {
+	authorizationHeaderValidator,
+	paramValidator,
+} from "../_shared/validators";
 
-export default openapiRoute().openapi(
-	createRoute({
-		method: "delete",
-		path: "/tasks/{taskId}",
-		summary: "taskの削除",
-		tags: ["tasks"],
-		request: {
-			params: z.object({
-				taskId: z.string().regex(/^\d+$/).transform(Number),
-			}),
-			headers: z.object({
-				authorization: z.string(),
-			}),
-		},
-		responses: {
-			200: {
-				description: "Success to delete the task",
-				content: {
-					"application/json": {
-						schema: z.object({
-							ok: z.boolean().openapi({}),
-						}),
-					},
-				},
-			},
-		},
-	}),
+export default new Hono().delete(
+	"/tasks/:taskId",
+	authorizationHeaderValidator(),
+	paramValidator(
+		z.object({
+			taskId: z.string().regex(/^\d+$/).transform(Number),
+		}),
+	),
 	async (c) => {
 		const { taskId } = c.req.valid("param");
 

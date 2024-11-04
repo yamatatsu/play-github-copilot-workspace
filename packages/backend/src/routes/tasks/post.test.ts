@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { Hono } from "hono";
 import { testClient } from "hono/testing";
 import route from "./post";
 
@@ -8,7 +8,7 @@ const expectDate = expect.stringMatching(
 );
 
 // TODO: refactor as moving to a shared file
-const app = new OpenAPIHono()
+const app = new Hono()
 	.use("/*", (c, next) => {
 		c.set("jwtPayload", { sub: "test-user-sub" });
 		return next();
@@ -18,8 +18,8 @@ const client = testClient(app);
 
 test("response when 200", async () => {
 	const res = await client.tasks.$post({
+		header: { authorization: "Bearer xxx" },
 		json: { title: "Buy milk", content: "Buy milk" },
-		header: { authorization: "" },
 	});
 
 	expect(await res.json()).toEqual({
@@ -35,19 +35,19 @@ test("response when 200", async () => {
 
 test("new record when 200", async () => {
 	const res = await client.tasks.$post({
+		header: { authorization: "Bearer xxx" },
 		json: { title: "Buy milk", content: "Buy milk" },
-		header: { authorization: "" },
 	});
 
 	if (!res.ok) throw new Error(await res.text());
 
 	const { id } = await res.json();
 
-	const task = await prisma.task.findUniqueOrThrow({
+	const todo = await prisma.task.findUniqueOrThrow({
 		where: { id },
 	});
 
-	expect(task).toEqual({
+	expect(todo).toEqual({
 		id: expect.any(Number),
 		title: "Buy milk",
 		content: "Buy milk",
@@ -60,9 +60,9 @@ test("new record when 200", async () => {
 
 test("400", async () => {
 	const res = await client.tasks.$post({
+		header: { authorization: "Bearer xxx" },
 		// @ts-expect-error
 		json: {}, // empty
-		header: { authorization: "" },
 	});
 
 	expect(await res.json()).toEqual({
