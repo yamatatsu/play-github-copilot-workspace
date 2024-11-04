@@ -7,9 +7,8 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import Table from "@cloudscape-design/components/table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { fetchAuthSession } from "aws-amplify/auth";
 import { useState } from "react";
-import { apiClient } from "../api/apiClient";
+import { deleteTask, listTasks, postTask } from "../api";
 
 export const Route = createFileRoute("/tasks")({
 	component: Component,
@@ -31,27 +30,12 @@ function Component() {
 
 	const { data: tasks, isLoading } = useQuery({
 		queryKey: ["api", "tasks"],
-		queryFn: async () => {
-			const session = await fetchAuthSession();
-			const idToken = session.tokens?.idToken?.toString();
-			const res = await apiClient.tasks.$get({
-				header: { authorization: `Bearer ${idToken}` },
-			});
-			return res.json();
-		},
+		queryFn: listTasks,
 	});
 
 	const taskPostMutation = useMutation({
 		mutationFn: async () => {
-			const session = await fetchAuthSession();
-			const idToken = session.tokens?.idToken?.toString();
-
-			const res = await apiClient.tasks.$post({
-				json: { title: newTaskTitle, content: newTaskContent },
-				header: { authorization: `Bearer ${idToken}` },
-			});
-
-			return res.json();
+			return postTask({ title: newTaskTitle, content: newTaskContent });
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
@@ -63,15 +47,7 @@ function Component() {
 
 	const taskDeleteMutation = useMutation({
 		mutationFn: async (taskId: number) => {
-			const session = await fetchAuthSession();
-			const idToken = session.tokens?.idToken?.toString();
-
-			const res = await apiClient.tasks[":taskId"].$delete({
-				param: { taskId: taskId.toString() },
-				header: { authorization: `Bearer ${idToken}` },
-			});
-
-			return res.json();
+			return deleteTask(taskId.toString());
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
