@@ -1,6 +1,6 @@
 import { prisma } from "@/db";
 import { Hono } from "hono";
-import { authorizationHeaderValidator } from "../_shared/validators";
+import { authorizationHeaderValidator } from "./_shared/validators";
 
 export default new Hono().get(
 	"/tasks",

@@ -4,7 +4,7 @@ import { z } from "zod";
 import {
 	authorizationHeaderValidator,
 	paramValidator,
-} from "../_shared/validators";
+} from "./_shared/validators";
 
 export default new Hono().delete(
 	"/tasks/:taskId",

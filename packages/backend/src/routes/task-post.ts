@@ -4,7 +4,7 @@ import { z } from "zod";
 import {
 	authorizationHeaderValidator,
 	jsonValidator,
-} from "../_shared/validators";
+} from "./_shared/validators";
 
 export default new Hono().post(
 	"/tasks",
