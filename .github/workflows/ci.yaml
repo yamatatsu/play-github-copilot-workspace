@@ -45,6 +45,6 @@ jobs:
 
       - name: Run Test
         run: |
-          pnpm prisma migrate deploy
-          pnpm prisma generate
+          pnpm prisma:test migrate deploy
+          pnpm prisma:test generate
           pnpm test

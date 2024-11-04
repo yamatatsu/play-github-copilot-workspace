@@ -8,6 +8,7 @@
 		"build": "pnpm -r build",
 		"build:backend": "pnpm --filter backend build",
 		"prisma": "pnpm --filter backend exec prisma",
+		"prisma:test": "pnpm --filter backend run prisma:test",
 		"lint": "biome check .",
 		"type-check": "pnpm run -r type-check",
 		"test": "pnpm -r test:ci",
