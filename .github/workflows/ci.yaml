@@ -12,6 +12,15 @@ jobs:
   ci-job:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mydb
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,5 +40,11 @@ jobs:
       - name: Build project
         run: pnpm build
 
-      - name: Run Biome check
+      - name: Run check
         run: pnpm check
+
+      - name: Run Test
+        run:
+          pnpm prisma migrate deploy
+          pnpm prisma generate
+          pnpm test
