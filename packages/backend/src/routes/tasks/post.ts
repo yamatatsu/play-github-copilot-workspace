@@ -1,14 +1,14 @@
 import { prisma } from "@/db";
 import { createRoute, z } from "@hono/zod-openapi";
 import { openapiRoute } from "../_shared/openapiRoute";
-import { error400Schema, todoSchema } from "../_shared/schema";
+import { error400Schema, taskSchema } from "../_shared/schema";
 
 export default openapiRoute().openapi(
 	createRoute({
 		method: "post",
-		path: "/todos",
+		path: "/tasks",
 		summary: "TODOの作成",
-		tags: ["todos"],
+		tags: ["tasks"],
 		request: {
 			body: {
 				content: {
@@ -30,10 +30,10 @@ export default openapiRoute().openapi(
 		},
 		responses: {
 			200: {
-				description: "Success to create the todo",
+				description: "Success to create the task",
 				content: {
 					"application/json": {
-						schema: todoSchema,
+						schema: taskSchema,
 					},
 				},
 			},

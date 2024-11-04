@@ -5,12 +5,12 @@ import { openapiRoute } from "../_shared/openapiRoute";
 export default openapiRoute().openapi(
 	createRoute({
 		method: "delete",
-		path: "/todos/{todoId}",
-		summary: "TODOの削除",
-		tags: ["todos"],
+		path: "/tasks/{taskId}",
+		summary: "taskの削除",
+		tags: ["tasks"],
 		request: {
 			params: z.object({
-				todoId: z.string().regex(/^\d+$/).transform(Number),
+				taskId: z.string().regex(/^\d+$/).transform(Number),
 			}),
 			headers: z.object({
 				authorization: z.string(),
@@ -18,7 +18,7 @@ export default openapiRoute().openapi(
 		},
 		responses: {
 			200: {
-				description: "Success to delete the todo",
+				description: "Success to delete the task",
 				content: {
 					"application/json": {
 						schema: z.object({
@@ -30,11 +30,11 @@ export default openapiRoute().openapi(
 		},
 	}),
 	async (c) => {
-		const { todoId } = c.req.valid("param");
+		const { taskId } = c.req.valid("param");
 
 		await prisma.task.delete({
 			where: {
-				id: todoId,
+				id: taskId,
 			},
 		});
 

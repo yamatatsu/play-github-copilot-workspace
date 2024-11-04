@@ -1,13 +1,13 @@
 import { prisma } from "@/db";
 import { createRoute, z } from "@hono/zod-openapi";
 import { openapiRoute } from "../_shared/openapiRoute";
-import { todoSchema } from "../_shared/schema";
+import { taskSchema } from "../_shared/schema";
 export default openapiRoute().openapi(
 	createRoute({
 		method: "get",
-		path: "/todos",
-		summary: "Fetch TODOs",
-		tags: ["todos"],
+		path: "/tasks",
+		summary: "Fetch tasks",
+		tags: ["tasks"],
 		request: {
 			headers: z.object({
 				authorization: z.string(),
@@ -15,10 +15,10 @@ export default openapiRoute().openapi(
 		},
 		responses: {
 			200: {
-				description: "Success to fetch the todos",
+				description: "Success to fetch the tasks",
 				content: {
 					"application/json": {
-						schema: z.array(todoSchema),
+						schema: z.array(taskSchema),
 					},
 				},
 			},

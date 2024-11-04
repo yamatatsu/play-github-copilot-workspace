@@ -5,20 +5,20 @@ import { z } from "zod";
 import { paramHook } from "../_shared/validationHook";
 
 export default new Hono().delete(
-	"/todos/:todoId",
+	"/tasks/:taskId",
 	zValidator(
 		"param",
 		z.object({
-			todoId: z.string().regex(/^\d+$/).transform(Number),
+			taskId: z.string().regex(/^\d+$/).transform(Number),
 		}),
 		paramHook,
 	),
 	async (c) => {
-		const { todoId } = c.req.valid("param");
+		const { taskId } = c.req.valid("param");
 
 		await prisma.task.delete({
 			where: {
-				id: todoId,
+				id: taskId,
 			},
 		});
 

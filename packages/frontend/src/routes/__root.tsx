@@ -52,7 +52,7 @@ export const Route = createRootRoute({
 									}}
 									items={[
 										{ type: "link", text: "Home", href: "/home" },
-										{ type: "link", text: "Todos", href: "/todos" },
+										{ type: "link", text: "Tasks", href: "/tasks" },
 									]}
 								/>
 							}

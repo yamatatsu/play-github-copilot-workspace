@@ -6,27 +6,28 @@ import route from "./delete";
 const app = new OpenAPIHono().route("/", route);
 const client = testClient(app);
 
-test("delete TODO", async () => {
+test("delete TASK", async () => {
 	// GIVEN
-	const todo = await prisma.task.create({
+	const task = await prisma.task.create({
 		data: {
-			title: "Test TODO",
+			title: "Test TASK",
 			content: "Test content",
 			createdBy: "test-user",
 		},
 	});
 
 	// WHEN
-	const res = await client.todos[":todoId"].$delete({
-		param: { todoId: todo.id.toString() },
+	const res = await client.tasks[":taskId"].$delete({
+		param: { taskId: task.id.toString() },
+		header: { authorization: "" },
 	});
 
 	// THEN
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual({ ok: true });
 
-	const deletedTodo = await prisma.task.findUnique({
-		where: { id: todo.id },
+	const deletedTask = await prisma.task.findUnique({
+		where: { id: task.id },
 	});
-	expect(deletedTodo).toBeNull();
+	expect(deletedTask).toBeNull();
 });

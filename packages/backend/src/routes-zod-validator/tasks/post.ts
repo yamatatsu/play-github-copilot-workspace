@@ -5,7 +5,7 @@ import { z } from "zod";
 import { jsonHook } from "../_shared/validationHook";
 
 export default new Hono().post(
-	"/todos",
+	"/tasks",
 	zValidator(
 		"json",
 		z.object({
@@ -23,7 +23,7 @@ export default new Hono().post(
 
 		const { sub } = c.get("jwtPayload");
 
-		const todo = await prisma.task.create({
+		const task = await prisma.task.create({
 			data: {
 				title,
 				content,
@@ -31,6 +31,6 @@ export default new Hono().post(
 			},
 		});
 
-		return c.json(todo, 200);
+		return c.json(task, 200);
 	},
 );

@@ -19,7 +19,7 @@ test("health check", async () => {
 });
 
 test("400 caused by invalid authentication header", async () => {
-	const res = await client.todos.$get({
+	const res = await client.tasks.$get({
 		header: { authorization: "xxx" },
 	});
 
@@ -31,7 +31,7 @@ test("400 caused by invalid authentication header", async () => {
 });
 
 test("401 caused by no authentication header", async () => {
-	const res = await client.todos.$get({
+	const res = await client.tasks.$get({
 		// @ts-expect-error
 		header: {},
 	});
@@ -48,7 +48,7 @@ test("401 caused by invalid token", async () => {
 	verifyJwtSpy.mockReturnValue(Promise.resolve({ ok: false }));
 
 	// WHEN
-	const res = await client.todos.$get({
+	const res = await client.tasks.$get({
 		header: { authorization: "Bearer xxx" },
 	});
 
