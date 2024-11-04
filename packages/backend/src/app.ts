@@ -8,11 +8,14 @@ import taskList from "./routes/task-list";
 import taskPost from "./routes/task-post";
 
 export const app = new Hono()
-	// The health check endpoint doesn't need authentication and any other middleware.
+	// health check endpoint
+	// It doesn't need authentication and any other middleware.
 	.route("/", root)
+	// middlewares
 	.use("/*", logger)
 	.use("/*", cors)
 	.use("/*", bearerAuth)
+	// routes
 	.route("/", taskDelete)
 	.route("/", taskPost)
 	.route("/", taskList);
