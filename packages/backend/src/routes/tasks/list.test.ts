@@ -7,10 +7,10 @@ const app = new OpenAPIHono().route("/", route);
 const client = testClient(app);
 
 test("response when 200", async () => {
-	const todos = [
+	const tasks = [
 		{
 			id: 1,
-			title: "Test TODO 1",
+			title: "Test TASK 1",
 			content: "Content 1",
 			done: false,
 			createdBy: "user1",
@@ -19,7 +19,7 @@ test("response when 200", async () => {
 		},
 		{
 			id: 2,
-			title: "Test TODO 2",
+			title: "Test TASK 2",
 			content: "Content 2",
 			done: false,
 			createdBy: "user2",
@@ -29,22 +29,22 @@ test("response when 200", async () => {
 	];
 
 	await prisma.task.createMany({
-		data: todos,
+		data: tasks,
 	});
 
-	const res = await client.todos.$get({ header: { authorization: "" } });
+	const res = await client.tasks.$get({ header: { authorization: "" } });
 
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual([
 		{
-			...todos[0],
-			createdAt: todos[0].createdAt.toISOString(),
-			updatedAt: todos[0].updatedAt.toISOString(),
+			...tasks[0],
+			createdAt: tasks[0].createdAt.toISOString(),
+			updatedAt: tasks[0].updatedAt.toISOString(),
 		},
 		{
-			...todos[1],
-			createdAt: todos[1].createdAt.toISOString(),
-			updatedAt: todos[1].updatedAt.toISOString(),
+			...tasks[1],
+			createdAt: tasks[1].createdAt.toISOString(),
+			updatedAt: tasks[1].updatedAt.toISOString(),
 		},
 	]);
 });

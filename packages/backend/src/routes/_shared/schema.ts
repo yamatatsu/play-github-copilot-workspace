@@ -6,7 +6,7 @@ export const error400Schema = z.object({
 	}),
 });
 
-export const todoSchema = z
+export const taskSchema = z
 	.object({
 		id: z.number().openapi({}),
 		title: z.string().openapi({
@@ -19,4 +19,4 @@ export const todoSchema = z
 			example: false,
 		}),
 	})
-	.openapi("TODO");
+	.openapi("TASK");

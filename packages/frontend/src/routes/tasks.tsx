@@ -11,7 +11,7 @@ import { fetchAuthSession } from "aws-amplify/auth";
 import { useState } from "react";
 import { apiClient } from "../api/apiClient";
 
-export const Route = createFileRoute("/todos")({
+export const Route = createFileRoute("/tasks")({
 	component: Component,
 });
 
@@ -24,30 +24,30 @@ type Item = {
 
 function Component() {
 	const queryClient = useQueryClient();
-	const [selectedTodo, setSelectedTodo] = useState<Item | null>(null);
+	const [selectedTask, setSelectedTask] = useState<Item | null>(null);
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [newTodoTitle, setNewTodoTitle] = useState("");
-	const [newTodoContent, setNewTodoContent] = useState("");
+	const [newTaskTitle, setNewTaskTitle] = useState("");
+	const [newTaskContent, setNewTaskContent] = useState("");
 
-	const { data: todos, isLoading } = useQuery({
-		queryKey: ["api", "todos"],
+	const { data: tasks, isLoading } = useQuery({
+		queryKey: ["api", "tasks"],
 		queryFn: async () => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
-			const res = await apiClient.todos.$get({
+			const res = await apiClient.tasks.$get({
 				header: { authorization: `Bearer ${idToken}` },
 			});
 			return res.json();
 		},
 	});
 
-	const todoPostMutation = useMutation({
+	const taskPostMutation = useMutation({
 		mutationFn: async () => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
-			const res = await apiClient.todos.$post({
-				json: { title: newTodoTitle, content: newTodoContent },
+			const res = await apiClient.tasks.$post({
+				json: { title: newTaskTitle, content: newTaskContent },
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
@@ -59,28 +59,28 @@ function Component() {
 			return res.json();
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
+			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
 			setIsModalVisible(false);
-			setNewTodoTitle("");
-			setNewTodoContent("");
+			setNewTaskTitle("");
+			setNewTaskContent("");
 		},
 	});
 
-	const todoDeleteMutation = useMutation({
-		mutationFn: async (todoId: number) => {
+	const taskDeleteMutation = useMutation({
+		mutationFn: async (taskId: number) => {
 			const session = await fetchAuthSession();
 			const idToken = session.tokens?.idToken?.toString();
 
-			const res = await apiClient.todos[":todoId"].$delete({
-				param: { todoId: todoId.toString() },
+			const res = await apiClient.tasks[":taskId"].$delete({
+				param: { taskId: taskId.toString() },
 				header: { authorization: `Bearer ${idToken}` },
 			});
 
 			return res.json();
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["api", "todos"] });
-			setSelectedTodo(null);
+			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
+			setSelectedTask(null);
 		},
 	});
 
@@ -104,7 +104,7 @@ function Component() {
 						cell: (item) => (item.done ? "Yes" : "No"),
 					},
 				]}
-				items={todos || []}
+				items={tasks || []}
 				loading={isLoading}
 				loadingText="Loading resources"
 				header={
@@ -113,12 +113,12 @@ function Component() {
 							<SpaceBetween direction="horizontal" size="xs">
 								<Button
 									variant="normal"
-									disabled={!selectedTodo}
+									disabled={!selectedTask}
 									onClick={() => {
-										if (!selectedTodo) {
+										if (!selectedTask) {
 											return;
 										}
-										todoDeleteMutation.mutate(selectedTodo.id);
+										taskDeleteMutation.mutate(selectedTask.id);
 									}}
 								>
 									delete
@@ -134,7 +134,7 @@ function Component() {
 							</SpaceBetween>
 						}
 					>
-						TODOs
+						Tasks
 					</Header>
 				}
 				empty={
@@ -152,15 +152,15 @@ function Component() {
 					</Box>
 				}
 				selectionType="single"
-				selectedItems={selectedTodo ? [selectedTodo] : []}
+				selectedItems={selectedTask ? [selectedTask] : []}
 				onSelectionChange={({ detail }) =>
-					setSelectedTodo(detail.selectedItems[0])
+					setSelectedTask(detail.selectedItems[0])
 				}
 			/>
 			<Modal
 				onDismiss={() => setIsModalVisible(false)}
 				visible={isModalVisible}
-				header="Create TODO"
+				header="Create Task"
 				footer={
 					<SpaceBetween direction="horizontal" size="xs">
 						<Button variant="link" onClick={() => setIsModalVisible(false)}>
@@ -169,7 +169,7 @@ function Component() {
 						<Button
 							variant="primary"
 							onClick={() => {
-								todoPostMutation.mutate();
+								taskPostMutation.mutate();
 							}}
 						>
 							Submit
@@ -179,14 +179,14 @@ function Component() {
 			>
 				<SpaceBetween size="m">
 					<Input
-						value={newTodoTitle}
-						onChange={(event) => setNewTodoTitle(event.detail.value)}
-						placeholder="Enter TODO title"
+						value={newTaskTitle}
+						onChange={(event) => setNewTaskTitle(event.detail.value)}
+						placeholder="Enter Task title"
 					/>
 					<Input
-						value={newTodoContent}
-						onChange={(event) => setNewTodoContent(event.detail.value)}
-						placeholder="Enter TODO content"
+						value={newTaskContent}
+						onChange={(event) => setNewTaskContent(event.detail.value)}
+						placeholder="Enter Task content"
 					/>
 				</SpaceBetween>
 			</Modal>

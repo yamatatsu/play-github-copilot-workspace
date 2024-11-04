@@ -17,9 +17,8 @@ const app = new OpenAPIHono()
 const client = testClient(app);
 
 test("response when 200", async () => {
-	const res = await client.todos.$post({
+	const res = await client.tasks.$post({
 		json: { title: "Buy milk", content: "Buy milk" },
-		header: { authorization: "" },
 	});
 
 	expect(await res.json()).toEqual({
@@ -34,9 +33,8 @@ test("response when 200", async () => {
 });
 
 test("new record when 200", async () => {
-	const res = await client.todos.$post({
+	const res = await client.tasks.$post({
 		json: { title: "Buy milk", content: "Buy milk" },
-		header: { authorization: "" },
 	});
 
 	if (!res.ok) throw new Error(await res.text());
@@ -59,10 +57,9 @@ test("new record when 200", async () => {
 });
 
 test("400", async () => {
-	const res = await client.todos.$post({
+	const res = await client.tasks.$post({
 		// @ts-expect-error
 		json: {}, // empty
-		header: { authorization: "" },
 	});
 
 	expect(await res.json()).toEqual({
