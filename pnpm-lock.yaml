@@ -123,7 +123,7 @@ importers:
         version: 5.59.19(react@18.3.1)
       '@tanstack/react-router':
         specifier: ^1.77.6
-        version: 1.78.3(@tanstack/router-generator@1.78.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 1.79.0(@tanstack/router-generator@1.79.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       aws-amplify:
         specifier: ^6.6.5
         version: 6.8.0
@@ -139,7 +139,7 @@ importers:
     devDependencies:
       '@tanstack/router-plugin':
         specifier: ^1.76.4
-        version: 1.78.3(vite@5.4.10(@types/node@22.9.0))
+        version: 1.79.0(vite@5.4.10(@types/node@22.9.0))
       '@types/react':
         specifier: ^18.0.0
         version: 18.3.12
@@ -1654,11 +1654,11 @@ packages:
     peerDependencies:
       react: ^18 || ^19
 
-  '@tanstack/react-router@1.78.3':
-    resolution: {integrity: sha512-e4Mws3QTLDs++EyP3HwYKz+yZP3LyO5LonqEXngHYM8UjF2lvn6BnNR4vCmFNZfMFXpafR7jHSh7VOdBwnCngA==}
+  '@tanstack/react-router@1.79.0':
+    resolution: {integrity: sha512-v+0+Y3mCsd6waphnG0dloU9cDtSbB5k/LwbkhqXd2uGhwZyI1/nvvOcSOnuTB8CDEvC6WFNBt+fKOPVqNZ3ezw==}
     engines: {node: '>=12'}
     peerDependencies:
-      '@tanstack/router-generator': 1.78.3
+      '@tanstack/router-generator': 1.79.0
       react: '>=18'
       react-dom: '>=18'
     peerDependenciesMeta:
@@ -1671,12 +1671,12 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
-  '@tanstack/router-generator@1.78.3':
-    resolution: {integrity: sha512-8/gy2+dzXeovCYsTeQZO8XvKqU5+cZi/QEIta8p74jmS0fftsIOFb1gV33cGoz+qts5ZThizDP9k8fIqHpOSQA==}
+  '@tanstack/router-generator@1.79.0':
+    resolution: {integrity: sha512-HJxmYs7GAA1AJQzyfy4Hiygmg93qCCDiAxQ//zCRMbzVntwpqtZ96o9UGOPjT3Lw0SxbyzbKgpo3zqCdwlv8Ew==}
     engines: {node: '>=12'}
 
-  '@tanstack/router-plugin@1.78.3':
-    resolution: {integrity: sha512-u8xkTfITnbri0VUvI3/nHGfzX11E0lLKs4MNEyMWemDptjgj70yRr+UeU/wcg44PFhwjVFIJ2xZSnBoMtDMh3Q==}
+  '@tanstack/router-plugin@1.79.0':
+    resolution: {integrity: sha512-dY81YyKxON9KhZQlrkkuxsl688pGpZ4HAF5w40ZkJa+nwmEJdg0b2td+MPXWbtmSd1t1cbYlFvc68k+PUSHN/A==}
     engines: {node: '>=12'}
     peerDependencies:
       '@rsbuild/core': '>=1.0.2'
@@ -2090,8 +2090,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.50:
-    resolution: {integrity: sha512-eMVObiUQ2LdgeO1F/ySTXsvqvxb6ZH2zPGaMYsWzRDdOddUa77tdmI0ltg+L16UpbWdhPmuF3wIQYyQq65WfZw==}
+  electron-to-chromium@1.5.51:
+    resolution: {integrity: sha512-kKeWV57KSS8jH4alKt/jKnvHPmJgBxXzGUSbMd4eQF+iOsVPl7bz2KUmu6eo80eMP8wVioTfTyTzdMgM15WXNg==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -5314,7 +5314,7 @@ snapshots:
       '@tanstack/query-core': 5.59.17
       react: 18.3.1
 
-  '@tanstack/react-router@1.78.3(@tanstack/router-generator@1.78.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-router@1.79.0(@tanstack/router-generator@1.79.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/history': 1.61.1
       '@tanstack/react-store': 0.5.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5323,7 +5323,7 @@ snapshots:
       tiny-invariant: 1.3.3
       tiny-warning: 1.0.3
     optionalDependencies:
-      '@tanstack/router-generator': 1.78.3
+      '@tanstack/router-generator': 1.79.0
 
   '@tanstack/react-store@0.5.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -5332,14 +5332,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
 
-  '@tanstack/router-generator@1.78.3':
+  '@tanstack/router-generator@1.79.0':
     dependencies:
       '@tanstack/virtual-file-routes': 1.64.0
       prettier: 3.3.3
       tsx: 4.19.2
       zod: 3.23.8
 
-  '@tanstack/router-plugin@1.78.3(vite@5.4.10(@types/node@22.9.0))':
+  '@tanstack/router-plugin@1.79.0(vite@5.4.10(@types/node@22.9.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@babel/generator': 7.26.2
@@ -5349,7 +5349,7 @@ snapshots:
       '@babel/template': 7.25.9
       '@babel/traverse': 7.25.9
       '@babel/types': 7.26.0
-      '@tanstack/router-generator': 1.78.3
+      '@tanstack/router-generator': 1.79.0
       '@tanstack/virtual-file-routes': 1.64.0
       '@types/babel__core': 7.20.5
       '@types/babel__generator': 7.6.8
@@ -5613,7 +5613,7 @@ snapshots:
   browserslist@4.24.2:
     dependencies:
       caniuse-lite: 1.0.30001677
-      electron-to-chromium: 1.5.50
+      electron-to-chromium: 1.5.51
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.2)
 
@@ -5786,7 +5786,7 @@ snapshots:
     dependencies:
       jake: 10.9.2
 
-  electron-to-chromium@1.5.50: {}
+  electron-to-chromium@1.5.51: {}
 
   emittery@0.13.1: {}
 
