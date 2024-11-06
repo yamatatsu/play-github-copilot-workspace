@@ -18,7 +18,7 @@
 		"@hono/swagger-ui": "^0.4.1",
 		"@hono/zod-openapi": "^0.16.4",
 		"@hono/zod-validator": "^0.4.1",
-		"@prisma/client": "5.21.1",
+		"@prisma/client": "5.22.0",
 		"@types/node": "22.9.0",
 		"aws-jwt-verify": "^4.0.1",
 		"hono": "^4.6.8",
