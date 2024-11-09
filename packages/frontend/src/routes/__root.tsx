@@ -50,9 +50,7 @@ export const Route = createRootRoute({
 										event.preventDefault();
 										navigate({ to: event.detail.href });
 									}}
-									items={[
-										{ type: "link", text: "Tasks", href: "/tasks" },
-									]}
+									items={[{ type: "link", text: "Tasks", href: "/tasks" }]}
 								/>
 							}
 						/>
