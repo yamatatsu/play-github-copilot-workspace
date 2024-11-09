@@ -8,7 +8,7 @@ import Table from "@cloudscape-design/components/table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { deleteTask, listTasks, postTask } from "../api";
+import { deleteTask, listTasks, postTask, updateTaskDone } from "../api";
 
 export const Route = createFileRoute("/tasks")({
 	component: Component,
@@ -55,6 +55,15 @@ function Component() {
 		},
 	});
 
+	const taskUpdateDoneMutation = useMutation({
+		mutationFn: async ({ taskId, done }: { taskId: number; done: boolean }) => {
+			return updateTaskDone(taskId.toString(), done);
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
+		},
+	});
+
 	return (
 		<>
 			<Table
@@ -72,7 +81,18 @@ function Component() {
 					{
 						id: "done",
 						header: "Done",
-						cell: (item) => (item.done ? "Yes" : "No"),
+						cell: (item) => (
+							<input
+								type="checkbox"
+								checked={item.done}
+								onChange={(e) => {
+									taskUpdateDoneMutation.mutate({
+										taskId: item.id,
+										done: e.target.checked,
+									});
+								}}
+							/>
+						),
 					},
 				]}
 				items={tasks || []}
