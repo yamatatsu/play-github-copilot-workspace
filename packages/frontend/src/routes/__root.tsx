@@ -51,7 +51,6 @@ export const Route = createRootRoute({
 										navigate({ to: event.detail.href });
 									}}
 									items={[
-										{ type: "link", text: "Home", href: "/home" },
 										{ type: "link", text: "Tasks", href: "/tasks" },
 									]}
 								/>
