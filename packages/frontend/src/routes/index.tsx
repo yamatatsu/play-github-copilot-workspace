@@ -3,6 +3,6 @@ import { redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
 	loader: async () => {
-		return redirect({ to: "/home" });
+		return redirect({ to: "/tasks" });
 	},
 });
