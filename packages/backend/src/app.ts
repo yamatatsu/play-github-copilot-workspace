@@ -6,6 +6,7 @@ import root from "./routes/root";
 import taskDelete from "./routes/task-delete";
 import taskList from "./routes/task-list";
 import taskPost from "./routes/task-post";
+import taskPut from "./routes/task-put";
 
 export const app = new Hono()
 	// health check endpoint
@@ -16,6 +17,7 @@ export const app = new Hono()
 	.use("/*", cors)
 	.use("/*", bearerAuth)
 	// routes
-	.route("/", taskDelete)
+	.route("/", taskList)
 	.route("/", taskPost)
-	.route("/", taskList);
+	.route("/", taskPut)
+	.route("/", taskDelete);
