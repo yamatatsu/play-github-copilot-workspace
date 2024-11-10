@@ -17,18 +17,22 @@ export default new Hono().put(
 	),
 	jsonValidator(
 		z.object({
+			title: z.string(),
+			content: z.string(),
 			done: z.boolean(),
 		}),
 	),
 	async (c) => {
 		const { taskId } = c.req.valid("param");
-		const { done } = c.req.valid("json");
+		const { title, content, done } = c.req.valid("json");
 
 		const task = await prisma.task.update({
 			where: {
 				id: taskId,
 			},
 			data: {
+				title,
+				content,
 				done,
 			},
 		});

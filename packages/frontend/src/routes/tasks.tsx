@@ -8,7 +8,7 @@ import Table from "@cloudscape-design/components/table";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { deleteTask, listTasks, postTask, updateTaskDone } from "../api";
+import { deleteTask, listTasks, postTask, updateTask } from "../api";
 
 export const Route = createFileRoute("/tasks")({
 	component: Component,
@@ -25,8 +25,8 @@ function Component() {
 	const queryClient = useQueryClient();
 	const [selectedTask, setSelectedTask] = useState<Item | null>(null);
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [newTaskTitle, setNewTaskTitle] = useState("");
-	const [newTaskContent, setNewTaskContent] = useState("");
+	const [taskTitle, setTaskTitle] = useState("");
+	const [taskContent, setTaskContent] = useState("");
 
 	const { data: tasks, isLoading } = useQuery({
 		queryKey: ["api", "tasks"],
@@ -35,13 +35,13 @@ function Component() {
 
 	const taskPostMutation = useMutation({
 		mutationFn: async () => {
-			return postTask({ title: newTaskTitle, content: newTaskContent });
+			return postTask({ title: taskTitle, content: taskContent });
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
 			setIsModalVisible(false);
-			setNewTaskTitle("");
-			setNewTaskContent("");
+			setTaskTitle("");
+			setTaskContent("");
 		},
 	});
 
@@ -55,12 +55,20 @@ function Component() {
 		},
 	});
 
-	const taskUpdateDoneMutation = useMutation({
-		mutationFn: async ({ taskId, done }: { taskId: number; done: boolean }) => {
-			return updateTaskDone(taskId.toString(), done);
+	const taskUpdateMutation = useMutation({
+		mutationFn: async ({
+			taskId,
+			title,
+			content,
+			done,
+		}: { taskId: number; title: string; content: string; done: boolean }) => {
+			return updateTask(taskId.toString(), title, content, done);
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["api", "tasks"] });
+			setTaskTitle("");
+			setTaskContent("");
+			setIsModalVisible(false);
 		},
 	});
 
@@ -86,8 +94,10 @@ function Component() {
 								type="checkbox"
 								checked={item.done}
 								onChange={(e) => {
-									taskUpdateDoneMutation.mutate({
+									taskUpdateMutation.mutate({
 										taskId: item.id,
+										title: item.title,
+										content: item.content,
 										done: e.target.checked,
 									});
 								}}
@@ -118,9 +128,25 @@ function Component() {
 									variant="primary"
 									onClick={() => {
 										setIsModalVisible(true);
+										setTaskTitle("");
+										setTaskContent("");
 									}}
 								>
 									create
+								</Button>
+								<Button
+									variant="normal"
+									disabled={!selectedTask}
+									onClick={() => {
+										if (!selectedTask) {
+											return;
+										}
+										setTaskTitle(selectedTask.title);
+										setTaskContent(selectedTask.content);
+										setIsModalVisible(true);
+									}}
+								>
+									edit
 								</Button>
 							</SpaceBetween>
 						}
@@ -135,6 +161,8 @@ function Component() {
 							<Button
 								onClick={() => {
 									setIsModalVisible(true);
+									setTaskTitle("");
+									setTaskContent("");
 								}}
 							>
 								create
@@ -151,7 +179,7 @@ function Component() {
 			<Modal
 				onDismiss={() => setIsModalVisible(false)}
 				visible={isModalVisible}
-				header="Create Task"
+				header={selectedTask ? "Edit Task" : "Create Task"}
 				footer={
 					<SpaceBetween direction="horizontal" size="xs">
 						<Button variant="link" onClick={() => setIsModalVisible(false)}>
@@ -160,7 +188,16 @@ function Component() {
 						<Button
 							variant="primary"
 							onClick={() => {
-								taskPostMutation.mutate();
+								if (selectedTask) {
+									taskUpdateMutation.mutate({
+										taskId: selectedTask.id,
+										title: taskTitle,
+										content: taskContent,
+										done: selectedTask.done,
+									});
+								} else {
+									taskPostMutation.mutate();
+								}
 							}}
 						>
 							Submit
@@ -170,13 +207,13 @@ function Component() {
 			>
 				<SpaceBetween size="m">
 					<Input
-						value={newTaskTitle}
-						onChange={(event) => setNewTaskTitle(event.detail.value)}
+						value={taskTitle}
+						onChange={(event) => setTaskTitle(event.detail.value)}
 						placeholder="Enter Task title"
 					/>
 					<Input
-						value={newTaskContent}
-						onChange={(event) => setNewTaskContent(event.detail.value)}
+						value={taskContent}
+						onChange={(event) => setTaskContent(event.detail.value)}
 						placeholder="Enter Task content"
 					/>
 				</SpaceBetween>
