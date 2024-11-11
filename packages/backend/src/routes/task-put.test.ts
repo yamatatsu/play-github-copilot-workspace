@@ -71,6 +71,8 @@ test("invalid request body", async () => {
 		message: "Bad Request",
 		errors: {
 			fieldErrors: {
+				title: ["Required"],
+				content: ["Required"],
 				done: ["Expected boolean, received string"],
 			},
 			formErrors: [],
