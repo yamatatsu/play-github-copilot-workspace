@@ -6,7 +6,10 @@ export default new Hono().get(
 	"/tasks",
 	authorizationHeaderValidator(),
 	async (c) => {
-		const tasks = await prisma.task.findMany();
+		const { sub } = c.get("jwtPayload");
+		const tasks = await prisma.task.findMany({
+			where: { createdBy: sub },
+		});
 		return c.json(tasks, 200);
 	},
 );

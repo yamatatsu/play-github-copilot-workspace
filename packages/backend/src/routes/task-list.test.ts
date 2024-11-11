@@ -3,7 +3,12 @@ import { Hono } from "hono";
 import { testClient } from "hono/testing";
 import route from "./task-list";
 
-const app = new Hono().route("/", route);
+const app = new Hono()
+	.use("/*", (c, next) => {
+		c.set("jwtPayload", { sub: "user1" });
+		return next();
+	})
+	.route("/", route);
 const client = testClient(app);
 
 test("response when 200", async () => {
@@ -42,11 +47,6 @@ test("response when 200", async () => {
 			...tasks[0],
 			createdAt: tasks[0].createdAt.toISOString(),
 			updatedAt: tasks[0].updatedAt.toISOString(),
-		},
-		{
-			...tasks[1],
-			createdAt: tasks[1].createdAt.toISOString(),
-			updatedAt: tasks[1].updatedAt.toISOString(),
 		},
 	]);
 });
