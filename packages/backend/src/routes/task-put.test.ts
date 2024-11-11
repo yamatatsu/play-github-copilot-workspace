@@ -20,13 +20,15 @@ test("update task", async () => {
 	const res = await client.tasks[":taskId"].$put({
 		header: { authorization: "Bearer xxx" },
 		param: { taskId: task.id.toString() },
-		json: { done: true },
+		json: { title: "Updated Task", content: "Updated content", done: true },
 	});
 
 	// THEN
 	expect(res.status).toBe(200);
 	expect(await res.json()).toEqual({
 		...task,
+		title: "Updated Task",
+		content: "Updated content",
 		done: true,
 		createdAt: task.createdAt.toISOString(),
 		updatedAt: expect.any(String),
@@ -35,7 +37,13 @@ test("update task", async () => {
 	const updatedTask = await prisma.task.findUnique({
 		where: { id: task.id },
 	});
-	expect(updatedTask?.done).toBe(true);
+	expect(updatedTask).toEqual(
+		expect.objectContaining({
+			title: "Updated Task",
+			content: "Updated content",
+			done: true,
+		}),
+	);
 });
 
 test("invalid request body", async () => {
@@ -63,6 +71,8 @@ test("invalid request body", async () => {
 		message: "Bad Request",
 		errors: {
 			fieldErrors: {
+				title: ["Required"],
+				content: ["Required"],
 				done: ["Expected boolean, received string"],
 			},
 			formErrors: [],

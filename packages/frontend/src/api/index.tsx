@@ -32,13 +32,18 @@ export async function deleteTask(taskId: string) {
 	return res.json();
 }
 
-export async function updateTaskDone(taskId: string, done: boolean) {
+export async function updateTask(
+	taskId: string,
+	title: string,
+	content: string,
+	done: boolean,
+) {
 	const authHeader = await getAuthHeader();
 
 	const res = await apiClient.tasks[":taskId"].$put({
 		header: authHeader,
 		param: { taskId },
-		json: { done },
+		json: { title, content, done },
 	});
 
 	return res.json();
