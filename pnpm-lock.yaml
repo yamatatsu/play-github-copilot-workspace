@@ -108,7 +108,7 @@ importers:
         version: 3.0.822(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@cloudscape-design/global-styles':
         specifier: ^1.0.0
-        version: 1.0.32
+        version: 1.0.33
       '@play-github-copilot-workspace/backend':
         specifier: workspace:*
         version: link:../backend
@@ -667,8 +667,8 @@ packages:
       react: ^16.8 || ^17 || ^18
       react-dom: ^16.8 || ^17 || ^18
 
-  '@cloudscape-design/global-styles@1.0.32':
-    resolution: {integrity: sha512-3X7YEnzB7U0HeWS2iGIXWgdUAfloWVm+skzJlFkj0MNGIZ7jpI5rH9u9jLFsS021a4WrpK12FM+cwgLjzAq03A==}
+  '@cloudscape-design/global-styles@1.0.33':
+    resolution: {integrity: sha512-6bg18XIxkRS2ojMNGxVA8mV35rqkiHDXwOJjfHhYPzg6LjFagZWyg/hRRGuP5MExszB748m2HYYdXT0EejxiPA==}
 
   '@cloudscape-design/test-utils-core@1.0.44':
     resolution: {integrity: sha512-2nGG763Nsbac03ct4KfqH+ec/0UVrs/sjILQTInAPg9em3E9W1IPbF4nV0MBKUd1irgxwKmmbBiZNFfTFjpiqA==}
@@ -4150,7 +4150,7 @@ snapshots:
       tslib: 2.8.1
       weekstart: 1.1.0
 
-  '@cloudscape-design/global-styles@1.0.32': {}
+  '@cloudscape-design/global-styles@1.0.33': {}
 
   '@cloudscape-design/test-utils-core@1.0.44':
     dependencies:
