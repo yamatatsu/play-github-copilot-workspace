@@ -70,8 +70,8 @@ importers:
   packages/cdk:
     dependencies:
       aws-cdk-lib:
-        specifier: 2.166.0
-        version: 2.166.0(constructs@10.4.2)
+        specifier: 2.173.2
+        version: 2.173.2(constructs@10.4.2)
       constructs:
         specifier: ^10.0.0
         version: 10.4.2
@@ -83,8 +83,8 @@ importers:
         specifier: 22.9.0
         version: 22.9.0
       aws-cdk:
-        specifier: 2.166.0
-        version: 2.166.0
+        specifier: 2.173.2
+        version: 2.173.2
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.9.0)
@@ -1795,8 +1795,8 @@ packages:
   aws-amplify@6.8.0:
     resolution: {integrity: sha512-/j88ZlyQWnz8UaHBRFpciFBZUmtrd92BfwJMeSPVbBySyVv4vZC8wRCiUkkXSVy0QbVv6nvpMnPnf6fexYnLGw==}
 
-  aws-cdk-lib@2.166.0:
-    resolution: {integrity: sha512-FAsIz/CpczbMrcShgvTWNp3kcGN6IDojJWNLqHioTRsTekcyN3OPmKvQJXUNWL0fnhTd8biFXC2esg6kM19xZw==}
+  aws-cdk-lib@2.173.2:
+    resolution: {integrity: sha512-cL9+z8Pl3VZGoO7BwdsrFAOeud/vSl3at7OvmhihbNprMN15XuFUx/rViAU5OI1m92NbV4NBzYSLbSeCwYLNyw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -1813,8 +1813,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.166.0:
-    resolution: {integrity: sha512-AvwYXJt92lMlp0pB49HJtlvyWFZUBcX4DliIV3JfLngLpAlwVHQtvzPbL8qCvxHwZ3CIzJ1wKEth8QzdYmyOPQ==}
+  aws-cdk@2.173.2:
+    resolution: {integrity: sha512-qyMU4FoRJdZDUpsOBqyRBALBjf5A2N/MaHKX9iJUkbTET+d+nR07x3ai4TcEES+8pqPFHMTKpQMRDXs9Py/15w==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
 
@@ -5453,7 +5453,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  aws-cdk-lib@2.166.0(constructs@10.4.2):
+  aws-cdk-lib@2.173.2(constructs@10.4.2):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.210
       '@aws-cdk/asset-kubectl-v20': 2.1.3
@@ -5461,7 +5461,7 @@ snapshots:
       '@aws-cdk/cloud-assembly-schema': 38.0.1
       constructs: 10.4.2
 
-  aws-cdk@2.166.0:
+  aws-cdk@2.173.2:
     optionalDependencies:
       fsevents: 2.3.2
 
