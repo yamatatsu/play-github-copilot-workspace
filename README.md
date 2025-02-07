@@ -1,18 +1,29 @@
 # play-github-copilot-workspace
 
-## Setting up React with Vite
+## リポジトリの目的
 
-To set up React with Vite, follow these steps:
+このリポジトリの目的は、さまざまな技術やツールを使用してフルスタックアプリケーションを開発するためのワークスペースを提供することです。リポジトリには、バックエンド、フロントエンド、およびインフラストラクチャのコードが含まれており、開発およびデプロイのための設定ファイルも含まれています。
 
-1. Install the dependencies by running `pnpm install`.
-2. Start the development server by running `pnpm dev`.
-3. Build the project by running `pnpm build`.
+* バックエンドは、Node.js、TypeScript、およびHonoフレームワークを使用して実装されており、データベースとのやり取りにはPrismaが使用されています。バックエンドのコードは`packages/backend`ディレクトリにあります。
+* フロントエンドは、ReactとViteを使用して実装されており、AWS AmplifyやCloudscape Designコンポーネントなどの追加ライブラリも使用されています。フロントエンドのコードは`packages/frontend`ディレクトリにあります。
+* インフラストラクチャはAWS CDKを使用して管理されており、バックエンドサービスのデプロイおよびGitHub Actionsのロールのためのスタックが含まれています。インフラストラクチャのコードは`packages/cdk`ディレクトリにあります。
+* リポジトリには、ESLint、Husky、Biomeなどの開発ツールの設定ファイルや、GitHub Actionsを使用したCI/CDワークフローが含まれています。これらの設定はルートディレクトリおよび`.github`ディレクトリにあります。
 
-You should now have a basic React application running with Vite.
+## プロジェクトのセットアップとビルド
 
-## Build Process
+プロジェクトをセットアップしてビルドするには、次の手順に従ってください：
 
-To build the project, follow these steps:
+1. `pnpm install`を実行して依存関係をインストールします。
+2. `pnpm dev`を実行して開発サーバーを起動します。
+3. `pnpm build`を実行してプロジェクトをビルドします。
 
-1. Run `pnpm build` to create a production build of the project.
-2. The build output will be located in the `dist` directory.
+これで、Viteを使用した基本的なReactアプリケーションが実行されるはずです。
+
+## 開発ツールとCI/CDワークフロー
+
+リポジトリには、さまざまな開発ツールとCI/CDワークフローの設定ファイルが含まれています：
+
+* **ESLint**: JavaScriptコードの問題を特定して修正するためのツール。
+* **Husky**: Gitフックを管理するためのツール。
+* **Biome**: コードのフォーマットとリンティングのためのツール。
+* **GitHub Actions**: テストやデプロイなどのタスクを自動化するためのCI/CDワークフロー。
