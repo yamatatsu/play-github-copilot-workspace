@@ -48,5 +48,10 @@ test("response when 200", async () => {
 			createdAt: tasks[0].createdAt.toISOString(),
 			updatedAt: tasks[0].updatedAt.toISOString(),
 		},
+		{
+			...tasks[1],
+			createdAt: tasks[1].createdAt.toISOString(),
+			updatedAt: tasks[1].updatedAt.toISOString(),
+		},
 	]);
 });
