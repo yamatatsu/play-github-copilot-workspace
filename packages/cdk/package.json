@@ -8,7 +8,7 @@
 		"test:ci": "jest"
 	},
 	"dependencies": {
-		"aws-cdk-lib": "2.166.0",
+		"aws-cdk-lib": "2.222.0",
 		"constructs": "^10.0.0"
 	},
 	"devDependencies": {
