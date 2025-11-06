@@ -71,10 +71,10 @@ importers:
     dependencies:
       aws-cdk-lib:
         specifier: 2.166.0
-        version: 2.166.0(constructs@10.4.2)
+        version: 2.166.0(constructs@10.4.3)
       constructs:
         specifier: ^10.0.0
-        version: 10.4.2
+        version: 10.4.3
     devDependencies:
       '@types/jest':
         specifier: ^29.5.13
@@ -1967,8 +1967,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  constructs@10.4.2:
-    resolution: {integrity: sha512-wsNxBlAott2qg8Zv87q3eYZYgheb9lchtBfjHzzLHtXbttwSrHPs1NNQbBrmbb1YZvYg2+Vh0Dor76w4mFxJkA==}
+  constructs@10.4.3:
+    resolution: {integrity: sha512-3+ZB67qWGM1vEstNpj6pGaLNN1qz4gxC1CBhEUhZDZk0PqzQWY65IzC1Doq17MGPa9xa2wJ1G/DJ3swU8kWAHQ==}
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -5453,13 +5453,13 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  aws-cdk-lib@2.166.0(constructs@10.4.2):
+  aws-cdk-lib@2.166.0(constructs@10.4.3):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.210
       '@aws-cdk/asset-kubectl-v20': 2.1.3
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.0
       '@aws-cdk/cloud-assembly-schema': 38.0.1
-      constructs: 10.4.2
+      constructs: 10.4.3
 
   aws-cdk@2.166.0:
     optionalDependencies:
@@ -5646,7 +5646,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  constructs@10.4.2: {}
+  constructs@10.4.3: {}
 
   convert-source-map@2.0.0: {}
 
